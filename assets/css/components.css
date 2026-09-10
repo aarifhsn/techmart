@@ -1,0 +1,336 @@
+/* =========================================================
+   TechMart — Components
+   Shared, reusable pieces used across multiple sections. Icon
+   wrapper + count badge (Phase 2); section header, button, and
+   category item (Phase 3). Product card and badges follow in
+   Phase 4.
+   ========================================================= */
+
+.tm-icon {
+	display: inline-flex;
+	width: 20px;
+	height: 20px;
+	flex: 0 0 auto;
+}
+
+.tm-icon svg {
+	width: 100%;
+	height: 100%;
+}
+
+.tm-badge-count {
+	position: absolute;
+	top: -6px;
+	right: -10px;
+	min-width: 18px;
+	height: 18px;
+	padding-inline: 4px;
+	display: grid;
+	place-items: center;
+	background: var(--tm-color-primary);
+	color: var(--tm-color-white);
+	font-size: 0.6875rem;
+	font-weight: var(--tm-fw-bold);
+	border-radius: var(--tm-radius-pill);
+	line-height: 1;
+}
+
+/* ---------- Section header ---------- */
+.tm-section-header {
+	display: flex;
+	align-items: baseline;
+	justify-content: space-between;
+	gap: var(--tm-space-4);
+}
+
+.tm-section-header__title {
+	margin: 0;
+}
+
+.tm-section-header__link {
+	display: inline-flex;
+	align-items: center;
+	gap: var(--tm-space-1);
+	font-weight: var(--tm-fw-semibold);
+	color: var(--tm-color-primary);
+	white-space: nowrap;
+}
+
+.tm-section-header__link .tm-icon {
+	width: 16px;
+	height: 16px;
+}
+
+/* ---------- Button ---------- */
+.tm-button {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	padding: var(--tm-space-3) var(--tm-space-6);
+	border-radius: var(--tm-radius-sm);
+	font-weight: var(--tm-fw-semibold);
+	transition: background var(--tm-transition-fast), color var(--tm-transition-fast), border-color var(--tm-transition-fast);
+}
+
+.tm-button--primary {
+	background: var(--tm-color-primary);
+	color: var(--tm-color-white);
+}
+
+.tm-button--primary:hover,
+.tm-button--primary:focus-visible {
+	background: var(--tm-color-primary-hover);
+}
+
+.tm-button--secondary {
+	background: var(--tm-color-white);
+	color: var(--tm-color-dark);
+	border: 1px solid var(--tm-color-border);
+}
+
+.tm-button--secondary:hover,
+.tm-button--secondary:focus-visible {
+	border-color: var(--tm-color-primary);
+	color: var(--tm-color-primary);
+}
+
+/* ---------- Category item ---------- */
+.tm-category-item {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: var(--tm-space-3);
+	text-align: center;
+}
+
+.tm-category-item__image {
+	display: grid;
+	place-items: center;
+	width: 72px;
+	height: 72px;
+	border-radius: 50%;
+	background: var(--tm-color-surface);
+	overflow: hidden;
+	transition: background var(--tm-transition-fast);
+}
+
+.tm-category-item:hover .tm-category-item__image,
+.tm-category-item:focus-visible .tm-category-item__image {
+	background: var(--tm-color-border);
+}
+
+.tm-category-item__image img {
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+}
+
+.tm-category-item__initial {
+	font-size: var(--tm-fs-h3);
+	font-weight: var(--tm-fw-bold);
+	color: var(--tm-color-primary);
+}
+
+.tm-category-item__name {
+	font-size: var(--tm-fs-small);
+	font-weight: var(--tm-fw-semibold);
+	color: var(--tm-color-dark);
+}
+
+.tm-category-item__count {
+	color: var(--tm-color-body);
+	font-weight: var(--tm-fw-regular);
+}
+
+/* ---------- Rating ---------- */
+.tm-rating {
+	display: inline-flex;
+	align-items: center;
+	gap: var(--tm-space-2);
+}
+
+.tm-rating__track {
+	position: relative;
+	display: inline-flex;
+	gap: 2px;
+	color: var(--tm-color-border);
+}
+
+.tm-rating__fill {
+	position: absolute;
+	top: 0;
+	left: 0;
+	display: inline-flex;
+	gap: 2px;
+	overflow: hidden;
+	color: var(--tm-color-primary);
+	white-space: nowrap;
+}
+
+.tm-rating__track svg,
+.tm-rating__fill svg {
+	display: block;
+	width: 14px;
+	height: 14px;
+}
+
+.tm-rating__count {
+	font-size: var(--tm-fs-small);
+	color: var(--tm-color-body);
+}
+
+/* ---------- Trust item (Why Shop With Us) ---------- */
+.tm-trust-item {
+	display: flex;
+	align-items: center;
+	gap: var(--tm-space-3);
+}
+
+.tm-trust-item--stacked {
+	flex-direction: column;
+	text-align: center;
+}
+
+.tm-trust-item__icon {
+	display: inline-grid;
+	place-items: center;
+	flex: 0 0 auto;
+	width: 56px;
+	height: 56px;
+	border-radius: 50%;
+	background: var(--tm-color-surface);
+	color: var(--tm-color-primary);
+}
+
+.tm-trust-item--inline .tm-trust-item__icon {
+	width: 44px;
+	height: 44px;
+}
+
+.tm-trust-item__icon .tm-icon {
+	width: 26px;
+	height: 26px;
+}
+
+.tm-trust-item--inline .tm-trust-item__icon .tm-icon {
+	width: 20px;
+	height: 20px;
+}
+
+.tm-trust-item__text {
+	display: flex;
+	flex-direction: column;
+	gap: 2px;
+}
+
+.tm-trust-item__title {
+	display: block;
+	font-size: var(--tm-fs-body);
+	font-weight: var(--tm-fw-semibold);
+}
+
+.tm-trust-item__description {
+	display: block;
+	margin: 0;
+	font-size: var(--tm-fs-small);
+	color: var(--tm-color-body);
+}
+
+/* ---------- Brand item ---------- */
+.tm-brand-item {
+	display: grid;
+	place-items: center;
+	padding: var(--tm-space-4);
+	filter: grayscale(100%);
+	opacity: 0.7;
+	transition: filter var(--tm-transition-fast), opacity var(--tm-transition-fast);
+}
+
+.tm-brand-item:hover,
+.tm-brand-item:focus-visible {
+	filter: none;
+	opacity: 1;
+}
+
+.tm-brand-item__logo {
+	max-height: 32px;
+	width: auto;
+}
+
+.tm-brand-item__name {
+	font-weight: var(--tm-fw-bold);
+	color: var(--tm-color-dark);
+}
+
+/* ---------- Breadcrumb (shop archive + single product) ---------- */
+.tm-breadcrumb {
+	margin-bottom: var(--tm-space-4);
+	font-size: var(--tm-fs-small);
+	color: var(--tm-color-body);
+}
+
+.tm-breadcrumb a {
+	color: var(--tm-color-body);
+}
+
+.tm-breadcrumb a:hover,
+.tm-breadcrumb a:focus-visible {
+	color: var(--tm-color-primary);
+}
+
+/* ---------- WooCommerce notices (info / error / success) ----------
+   Appear across the shop, single product, cart, checkout, and account
+   pages — a genuinely cross-cutting concern, styled once here rather
+   than per-page. */
+.woocommerce-info,
+.woocommerce-error,
+.woocommerce-message {
+	padding: var(--tm-space-5);
+	margin-bottom: var(--tm-space-5);
+	border-radius: var(--tm-radius-md);
+	border-left: 3px solid transparent;
+	list-style: none;
+	/*
+	 * Dark text throughout (Phase 10 accessibility fix), not the brand
+	 * sale/success color as body text — sale-on-white measures 3.76:1
+	 * and success-on-white 3.30:1, both failing WCAG AA's 4.5:1 for
+	 * text. Dark-on-white measures 18.58:1. The brand color still marks
+	 * each notice type at a glance via the left border instead, which
+	 * only needs to meet the more lenient 3:1 non-text contrast
+	 * threshold — both colors clear that easily.
+	 */
+	color: var(--tm-color-dark);
+}
+
+.woocommerce-info {
+	background: var(--tm-color-surface);
+	border-left-color: var(--tm-color-border);
+}
+
+.woocommerce-error {
+	background: var(--tm-color-surface); /* fallback for browsers without color-mix() support */
+	background: color-mix(in srgb, var(--tm-color-sale) 10%, var(--tm-color-white));
+	border-left-color: var(--tm-color-sale);
+}
+
+.woocommerce-message {
+	background: var(--tm-color-surface); /* fallback for browsers without color-mix() support */
+	background: color-mix(in srgb, var(--tm-color-success) 12%, var(--tm-color-white));
+	border-left-color: var(--tm-color-success);
+}
+
+.woocommerce-message .button,
+.woocommerce-error .button {
+	margin-left: var(--tm-space-3);
+}
+
+/* ---------- Quantity input ----------
+   Used on the single product page, the cart table, and anywhere else
+   WooCommerce renders its quantity stepper. */
+.quantity .qty {
+	width: 72px;
+	padding: var(--tm-space-3);
+	border: 1px solid var(--tm-color-border);
+	border-radius: var(--tm-radius-sm);
+	text-align: center;
+}

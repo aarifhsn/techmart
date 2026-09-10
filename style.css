@@ -1,0 +1,26 @@
+/*
+Theme Name: TechMart
+Theme URI: https://example.com/techmart
+Author: Arif
+Author URI: https://example.com
+Description: A custom-coded, component-based WooCommerce theme for TechMart, an electronics store. Built without a page builder for performance, accessibility, and long-term maintainability.
+Version: 1.0.0
+Requires at least: 6.4
+Tested up to: 6.6
+Requires PHP: 7.4
+License: GNU General Public License v2 or later
+License URI: https://www.gnu.org/licenses/gpl-2.0.html
+Text Domain: techmart
+Tags: e-commerce, custom-colors, custom-logo, custom-menu, translation-ready
+
+This file intentionally contains ONLY the theme header comment above.
+WordPress requires style.css to exist with this header to recognize the
+theme in wp-admin > Appearance > Themes, but the header comment is all
+WordPress actually reads from it for that purpose.
+
+Real styles live in assets/css/ (base, components, header, home, product,
+responsive) and are loaded selectively per-page by inc/enqueue.php. Keeping
+style.css empty of rules avoids a single monolithic stylesheet being loaded
+in full on every request — see inc/enqueue.php for the conditional loading
+strategy.
+*/

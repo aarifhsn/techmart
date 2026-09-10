@@ -1,0 +1,331 @@
+/* =========================================================
+   TechMart — Header
+   Announcement bar, main header row (logo, category toggle,
+   search, utility icons), category drawer, and primary nav row.
+   These are desktop-first base rules (≥1024px); tablet/mobile
+   overrides live in responsive.css, not here.
+   ========================================================= */
+
+/* ---------- Announcement bar ---------- */
+.tm-announcement {
+	background: var(--tm-color-primary-hover);
+	color: var(--tm-color-white);
+}
+
+.tm-announcement__inner {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: var(--tm-space-4);
+	padding-block: var(--tm-space-2);
+	font-size: var(--tm-fs-small);
+}
+
+.tm-announcement__text {
+	margin: 0;
+}
+
+.tm-announcement__code strong {
+	font-weight: var(--tm-fw-bold);
+}
+
+.tm-announcement__list {
+	display: flex;
+	gap: var(--tm-space-5);
+}
+
+.tm-announcement__list a {
+	color: var(--tm-color-white);
+	opacity: 0.85;
+	transition: opacity var(--tm-transition-fast);
+}
+
+.tm-announcement__list a:hover,
+.tm-announcement__list a:focus-visible {
+	opacity: 1;
+}
+
+/* ---------- Main header ---------- */
+.tm-header__main {
+	background: var(--tm-color-white);
+	border-bottom: 1px solid var(--tm-color-border);
+}
+
+.tm-header__inner {
+	position: relative; /* anchors the category drawer's absolute position */
+	display: flex;
+	align-items: center;
+	gap: var(--tm-space-6);
+	padding-block: var(--tm-space-4);
+}
+
+.tm-header__logo img {
+	height: 40px;
+	width: auto;
+}
+
+.tm-logo-text {
+	font-size: var(--tm-fs-h3);
+	font-weight: var(--tm-fw-bold);
+	color: var(--tm-color-primary);
+	white-space: nowrap;
+}
+
+/* ---------- Category toggle ---------- */
+.tm-category-toggle {
+	display: flex;
+	align-items: center;
+	gap: var(--tm-space-2);
+	padding: var(--tm-space-3) var(--tm-space-4);
+	border: 1px solid var(--tm-color-border);
+	border-radius: var(--tm-radius-sm);
+	font-weight: var(--tm-fw-semibold);
+	white-space: nowrap;
+	transition: background var(--tm-transition-fast), border-color var(--tm-transition-fast);
+}
+
+.tm-category-toggle:hover,
+.tm-category-toggle[aria-expanded="true"] {
+	background: var(--tm-color-surface);
+	border-color: var(--tm-color-primary);
+}
+
+/* ---------- Search ---------- */
+.tm-search {
+	flex: 1 1 auto;
+	display: flex;
+	min-width: 0;
+	border: 1px solid var(--tm-color-border);
+	border-radius: var(--tm-radius-sm);
+	overflow: hidden;
+}
+
+.tm-search__category {
+	border: none;
+	border-right: 1px solid var(--tm-color-border);
+	background: var(--tm-color-surface);
+	padding-inline: var(--tm-space-3);
+	max-width: 160px;
+}
+
+.tm-search__input {
+	flex: 1 1 auto;
+	min-width: 0;
+	border: none;
+	padding: var(--tm-space-3) var(--tm-space-4);
+}
+
+.tm-search__submit {
+	flex: 0 0 auto;
+	display: grid;
+	place-items: center;
+	width: 44px;
+	background: var(--tm-color-primary);
+	color: var(--tm-color-white);
+	transition: background var(--tm-transition-fast);
+}
+
+.tm-search__submit:hover,
+.tm-search__submit:focus-visible {
+	background: var(--tm-color-primary-hover);
+}
+
+/* ---------- Utility icons (wishlist / cart / account) ---------- */
+.tm-header__utility {
+	display: flex;
+	align-items: center;
+	gap: var(--tm-space-5);
+	flex: 0 0 auto;
+}
+
+.tm-header__utility-link {
+	position: relative;
+	display: flex;
+	align-items: center;
+	gap: var(--tm-space-2);
+	white-space: nowrap;
+	color: var(--tm-color-dark);
+}
+
+.tm-header__utility-label {
+	font-size: var(--tm-fs-small);
+	line-height: 1.2;
+}
+
+/* ---------- Category drawer (desktop: dropdown panel) ---------- */
+.tm-category-drawer {
+	position: absolute;
+	top: 100%;
+	left: 0;
+	width: 280px;
+	margin-top: var(--tm-space-2);
+	background: var(--tm-color-white);
+	border: 1px solid var(--tm-color-border);
+	border-radius: var(--tm-radius-md);
+	box-shadow: var(--tm-shadow-lg);
+	z-index: 100;
+}
+
+.tm-category-drawer__header {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	padding: var(--tm-space-4);
+	border-bottom: 1px solid var(--tm-color-border);
+}
+
+.tm-category-drawer__close {
+	font-size: var(--tm-fs-h2);
+	line-height: 1;
+	color: var(--tm-color-body);
+}
+
+.tm-category-drawer__list {
+	padding: var(--tm-space-2) 0;
+	max-height: 70vh;
+	overflow-y: auto;
+}
+
+.tm-category-drawer__list a {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: var(--tm-space-2);
+	padding: var(--tm-space-3) var(--tm-space-4);
+	font-weight: var(--tm-fw-semibold);
+	color: var(--tm-color-dark);
+	transition: background var(--tm-transition-fast), color var(--tm-transition-fast);
+}
+
+.tm-category-drawer__list a:hover,
+.tm-category-drawer__list a:focus-visible {
+	background: var(--tm-color-surface);
+	color: var(--tm-color-primary);
+}
+
+.tm-category-drawer__count {
+	color: var(--tm-color-body);
+	font-weight: var(--tm-fw-regular);
+	font-size: var(--tm-fs-small);
+}
+
+.tm-category-drawer__empty {
+	padding: var(--tm-space-4);
+	margin: 0;
+}
+
+/* ---------- Primary nav row ---------- */
+.tm-primary-nav {
+	border-bottom: 1px solid var(--tm-color-border);
+}
+
+.tm-primary-nav .tm-nav__list {
+	display: flex;
+	align-items: center;
+	gap: var(--tm-space-6);
+	padding-block: var(--tm-space-3);
+}
+
+.tm-primary-nav a {
+	font-weight: var(--tm-fw-semibold);
+	color: var(--tm-color-dark);
+	transition: color var(--tm-transition-fast);
+}
+
+.tm-primary-nav a:hover,
+.tm-primary-nav a:focus-visible {
+	color: var(--tm-color-primary);
+}
+
+/* ---------- Mini-cart dropdown ---------- */
+.tm-header__cart-wrapper {
+	position: relative;
+}
+
+.tm-mini-cart {
+	position: absolute;
+	top: 100%;
+	right: 0;
+	margin-top: var(--tm-space-2);
+	width: 340px;
+	max-width: 90vw;
+	padding: var(--tm-space-4);
+	background: var(--tm-color-white);
+	border: 1px solid var(--tm-color-border);
+	border-radius: var(--tm-radius-md);
+	box-shadow: var(--tm-shadow-lg);
+	z-index: 100;
+}
+
+/* WooCommerce's own cart/mini-cart.php markup/classes, restyled directly
+   — not overridden, same reasoning as the shop toolbar/pagination in
+   Phase 7. */
+.woocommerce-mini-cart {
+	max-height: 320px;
+	overflow-y: auto;
+}
+
+.woocommerce-mini-cart-item {
+	position: relative;
+	display: flex;
+	align-items: center;
+	gap: var(--tm-space-3);
+	padding-block: var(--tm-space-3);
+	border-bottom: 1px solid var(--tm-color-border);
+}
+
+.woocommerce-mini-cart-item img {
+	width: 48px;
+	height: 48px;
+	object-fit: contain;
+	border-radius: var(--tm-radius-sm);
+	background: var(--tm-color-surface);
+}
+
+.woocommerce-mini-cart-item a.remove {
+	position: absolute;
+	top: var(--tm-space-2);
+	right: 0;
+	color: var(--tm-color-body);
+}
+
+.woocommerce-mini-cart-item a.remove:hover {
+	color: var(--tm-color-sale);
+}
+
+.woocommerce-mini-cart__total {
+	display: flex;
+	justify-content: space-between;
+	padding-block: var(--tm-space-4);
+	font-weight: var(--tm-fw-bold);
+}
+
+.woocommerce-mini-cart__buttons {
+	display: flex;
+	gap: var(--tm-space-3);
+}
+
+.woocommerce-mini-cart__buttons a {
+	flex: 1 1 0;
+	padding: var(--tm-space-3);
+	border-radius: var(--tm-radius-sm);
+	text-align: center;
+	font-weight: var(--tm-fw-semibold);
+}
+
+.woocommerce-mini-cart__buttons a.checkout {
+	background: var(--tm-color-primary);
+	color: var(--tm-color-white);
+}
+
+.woocommerce-mini-cart__buttons a:not(.checkout) {
+	border: 1px solid var(--tm-color-border);
+	color: var(--tm-color-dark);
+}
+
+.woocommerce-mini-cart__empty-message {
+	margin: 0;
+	color: var(--tm-color-body);
+	text-align: center;
+	padding-block: var(--tm-space-4);
+}

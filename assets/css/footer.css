@@ -1,0 +1,166 @@
+/* =========================================================
+   TechMart — Footer
+   Not in the brief's originally suggested asset list, but added for
+   the same reason header.css exists: the footer renders on every
+   template, unconditionally, so it earns its own always-loaded
+   stylesheet rather than living inside home.css (homepage-only) or
+   being bolted onto header.css for no reason beyond "also chrome".
+   Desktop-first base rules; responsive.css adds breakpoint overrides.
+   ========================================================= */
+
+.tm-footer {
+	background: var(--tm-color-dark);
+	color: var(--tm-color-white);
+}
+
+/* ---------- Main columns ---------- */
+.tm-footer__main {
+	padding-block: var(--tm-space-12);
+}
+
+.tm-footer__grid {
+	display: grid;
+	grid-template-columns: 2fr repeat(4, 1fr);
+	gap: var(--tm-space-8);
+}
+
+.tm-footer__brand img {
+	height: 36px;
+	width: auto;
+	margin-bottom: var(--tm-space-4);
+}
+
+.tm-footer__brand .tm-logo-text {
+	display: inline-block;
+	margin-bottom: var(--tm-space-4);
+	font-size: var(--tm-fs-h3);
+	font-weight: var(--tm-fw-bold);
+	color: var(--tm-color-white);
+}
+
+.tm-footer__description {
+	color: var(--tm-color-border);
+	font-size: var(--tm-fs-small);
+	max-width: 32ch;
+	margin-bottom: var(--tm-space-5);
+}
+
+.tm-footer__social {
+	display: flex;
+	gap: var(--tm-space-3);
+}
+
+.tm-footer__social a {
+	display: grid;
+	place-items: center;
+	width: 36px;
+	height: 36px;
+	border-radius: var(--tm-radius-pill);
+	background: rgba(255, 255, 255, 0.08);
+	color: var(--tm-color-white);
+	transition: background var(--tm-transition-fast);
+}
+
+.tm-footer__social a:hover,
+.tm-footer__social a:focus-visible {
+	background: var(--tm-color-primary);
+}
+
+.tm-footer__social .tm-icon {
+	width: 16px;
+	height: 16px;
+}
+
+.tm-footer__heading {
+	color: var(--tm-color-white);
+	font-size: var(--tm-fs-small);
+	text-transform: uppercase;
+	letter-spacing: 0.04em;
+	margin-bottom: var(--tm-space-4);
+}
+
+.tm-footer__list {
+	display: flex;
+	flex-direction: column;
+	gap: var(--tm-space-3);
+}
+
+.tm-footer__list a {
+	color: var(--tm-color-border);
+	font-size: var(--tm-fs-small);
+	transition: color var(--tm-transition-fast);
+}
+
+.tm-footer__list a:hover,
+.tm-footer__list a:focus-visible {
+	color: var(--tm-color-white);
+}
+
+.tm-footer__contact {
+	display: flex;
+	flex-direction: column;
+	gap: var(--tm-space-3);
+}
+
+.tm-footer__contact li,
+.tm-footer__contact a {
+	display: flex;
+	align-items: flex-start;
+	gap: var(--tm-space-2);
+	color: var(--tm-color-border);
+	font-size: var(--tm-fs-small);
+}
+
+.tm-footer__contact a:hover,
+.tm-footer__contact a:focus-visible {
+	color: var(--tm-color-white);
+}
+
+.tm-footer__contact .tm-icon {
+	flex: 0 0 auto;
+	width: 16px;
+	height: 16px;
+	margin-top: 2px;
+}
+
+/* ---------- Optional widget area ---------- */
+.tm-footer__widgets {
+	padding-block: var(--tm-space-6);
+	border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* ---------- Bottom bar ---------- */
+.tm-footer__bottom {
+	border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.tm-footer__bottom-inner {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	flex-wrap: wrap;
+	gap: var(--tm-space-3);
+	padding-block: var(--tm-space-5);
+}
+
+.tm-footer__copyright {
+	margin: 0;
+	font-size: var(--tm-fs-small);
+	color: var(--tm-color-border);
+}
+
+.tm-footer__payments {
+	display: flex;
+	align-items: center;
+	gap: var(--tm-space-3);
+}
+
+.tm-footer__payments img {
+	height: 22px;
+	width: auto;
+}
+
+.tm-footer__payment-name {
+	font-size: var(--tm-fs-small);
+	color: var(--tm-color-border);
+}

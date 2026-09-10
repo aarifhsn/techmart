@@ -1,0 +1,214 @@
+/* =========================================================
+   TechMart — Product
+   Product card (shared by Trending Products, Best Sellers, Weekly
+   Deals, and — from Phase 7 — the shop/archive grid) and its grid.
+   Loaded on WooCommerce templates, cart, checkout, and the homepage —
+   see inc/enqueue.php. Desktop-first base rules; responsive.css adds
+   breakpoint overrides.
+   ========================================================= */
+
+/*
+ * .products is WooCommerce's own loop wrapper class (from the default
+ * loop/loop-start.php and loop-end.php templates, which are NOT
+ * overridden — see woocommerce/archive-product.php). Styling it here
+ * means the shop archive's grid automatically matches the homepage
+ * sections' grid with zero extra template files.
+ */
+.tm-product-grid,
+.products {
+	display: grid;
+	grid-template-columns: repeat(5, 1fr);
+	gap: var(--tm-space-6);
+	margin-top: var(--tm-space-8);
+}
+
+/* ---------- Card container ---------- */
+.tm-product-card {
+	display: flex;
+	flex-direction: column;
+	background: var(--tm-color-white);
+	border: 1px solid var(--tm-color-border);
+	border-radius: var(--tm-radius-md);
+	overflow: hidden;
+	transition: box-shadow var(--tm-transition-base), border-color var(--tm-transition-base);
+}
+
+.tm-product-card:hover {
+	border-color: var(--tm-color-primary);
+	box-shadow: var(--tm-shadow-md);
+}
+
+.tm-product-card__media {
+	position: relative;
+	background: var(--tm-color-surface);
+}
+
+.tm-product-card__image-link {
+	display: block;
+	aspect-ratio: 1 / 1; /* matches the 400x400 techmart-product-card image size */
+}
+
+.tm-product-card__image-link img {
+	width: 100%;
+	height: 100%;
+	object-fit: contain;
+	padding: var(--tm-space-4);
+}
+
+.tm-product-card__body {
+	display: flex;
+	flex-direction: column;
+	padding: var(--tm-space-4);
+	gap: var(--tm-space-1);
+}
+
+.tm-product-card__title {
+	margin: 0;
+	font-size: var(--tm-fs-body);
+	font-weight: var(--tm-fw-semibold);
+	/* Clamp to 2 lines so a long title never makes one card taller than
+	   its row siblings — plain CSS, no JS height-matching needed. */
+	display: -webkit-box;
+	-webkit-line-clamp: 2;
+	-webkit-box-orient: vertical;
+	overflow: hidden;
+}
+
+.tm-product-card__title a {
+	color: var(--tm-color-dark);
+}
+
+.tm-product-card__title a:hover,
+.tm-product-card__title a:focus-visible {
+	color: var(--tm-color-primary);
+}
+
+/* ---------- Badges ---------- */
+.tm-badge-list {
+	position: absolute;
+	top: var(--tm-space-3);
+	left: var(--tm-space-3);
+	display: flex;
+	flex-direction: column;
+	gap: var(--tm-space-1);
+	z-index: 1;
+}
+
+.tm-badge {
+	padding: 2px var(--tm-space-2);
+	border-radius: var(--tm-radius-sm);
+	font-size: 0.6875rem;
+	font-weight: var(--tm-fw-bold);
+	/*
+	 * Dark text, not white (Phase 10 accessibility fix). White-on-sale
+	 * measures 3.76:1, white-on-success 3.30:1, and white-on-accent
+	 * 2.02:1 — all fail WCAG AA's 4.5:1 requirement for text this size
+	 * (11px bold is well under the "large text" exemption threshold of
+	 * 18.66px bold). Dark text on the same three backgrounds measures
+	 * 4.94:1 / 5.64:1 / 9.20:1 — all pass comfortably, without changing
+	 * any of the given brand colors themselves.
+	 */
+	color: var(--tm-color-dark);
+}
+
+.tm-badge--sale {
+	background: var(--tm-color-sale);
+}
+
+.tm-badge--new {
+	background: var(--tm-color-accent);
+}
+
+.tm-badge--top-rated {
+	background: var(--tm-color-success);
+}
+
+/* ---------- Wishlist toggle ---------- */
+.tm-product-card__wishlist {
+	position: absolute;
+	top: var(--tm-space-3);
+	right: var(--tm-space-3);
+	z-index: 1;
+	display: grid;
+	place-items: center;
+	width: 32px;
+	height: 32px;
+	background: var(--tm-color-white);
+	border-radius: var(--tm-radius-pill);
+	box-shadow: var(--tm-shadow-sm);
+	color: var(--tm-color-dark);
+	transition: color var(--tm-transition-fast);
+}
+
+.tm-product-card__wishlist:hover,
+.tm-product-card__wishlist[aria-pressed="true"] {
+	color: var(--tm-color-sale);
+}
+
+.tm-product-card__wishlist .tm-icon {
+	width: 16px;
+	height: 16px;
+}
+
+/* ---------- Price ---------- */
+.tm-product-card__price {
+	margin-block: var(--tm-space-2) var(--tm-space-1);
+	font-size: var(--tm-fs-h3);
+}
+
+.tm-product-card__price del {
+	margin-right: var(--tm-space-2);
+	font-size: var(--tm-fs-small);
+	font-weight: var(--tm-fw-regular);
+	color: var(--tm-color-body);
+	text-decoration: line-through;
+}
+
+.tm-product-card__price ins {
+	color: var(--tm-color-dark);
+	font-weight: var(--tm-fw-bold);
+	text-decoration: none;
+}
+
+/* ---------- Add to cart ---------- */
+.tm-product-card__add-to-cart {
+	width: 100%;
+	margin-top: var(--tm-space-2);
+}
+
+/* WooCommerce's own AJAX add-to-cart JS toggles these two classes;
+   the visual treatment is ours since WooCommerce's default stylesheet
+   is disabled (see inc/enqueue.php). */
+.tm-product-card__add-to-cart.loading {
+	opacity: 0.6;
+	pointer-events: none;
+}
+
+.tm-product-card__add-to-cart.added::after {
+	content: "\2713";
+	margin-left: var(--tm-space-2);
+}
+
+/* ---------- Stock meter (Weekly Deals only — §15) ---------- */
+.tm-stock-meter {
+	margin-top: var(--tm-space-2);
+}
+
+.tm-stock-meter__bar {
+	height: 6px;
+	background: var(--tm-color-border);
+	border-radius: var(--tm-radius-pill);
+	overflow: hidden;
+}
+
+.tm-stock-meter__bar span {
+	display: block;
+	height: 100%;
+	background: var(--tm-color-sale);
+}
+
+.tm-stock-meter__label {
+	margin: var(--tm-space-1) 0 0;
+	font-size: var(--tm-fs-small);
+	color: var(--tm-color-body);
+}
