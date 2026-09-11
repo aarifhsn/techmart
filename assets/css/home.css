@@ -320,7 +320,7 @@
 .tm-why-shop {
   background: var(--tm-color-surface);
   border-radius: var(--tm-radius-lg);
-  padding-bottom: var(--tm-space-8);
+  margin-bottom: var(--tm-space-8);
 }
 
 .tm-why-shop__grid {
@@ -332,7 +332,7 @@
 .tm-why-shop__title {
   text-align: center;
   margin-bottom: var(--tm-space-12);
-  font-size: var(--tm-fs-h2);
+  font-size: var(--tm-fs-h3);
 }
 
 /* ---------- Brands ---------- */
@@ -346,9 +346,7 @@
 
 /* ---------- Newsletter ---------- */
 .tm-newsletter {
-  background: var(--tm-color-primary);
   color: var(--tm-color-white);
-  border-radius: var(--tm-radius-lg);
 }
 
 .tm-newsletter__inner {
@@ -358,6 +356,9 @@
   flex-wrap: wrap;
   gap: var(--tm-space-6);
   padding: var(--tm-space-10);
+  background: var(--tm-color-primary);
+  border-radius: var(--tm-radius-lg);
+  margin-bottom: 2rem;
 }
 
 .tm-newsletter__title {
