@@ -207,8 +207,10 @@
 /* ---------- Trust item (Why Shop With Us) ---------- */
 .tm-trust-item {
   display: flex;
+  flex-direction: row !important;
   align-items: center;
-  gap: var(--tm-space-3);
+  gap: var(--tm-space-2);
+  text-align: left !important;
 }
 
 .tm-trust-item--stacked {
@@ -220,8 +222,8 @@
   display: inline-grid;
   place-items: center;
   flex: 0 0 auto;
-  width: 56px;
-  height: 56px;
+  width: 30px;
+  height: 30px;
   border-radius: 50%;
   background: var(--tm-color-surface);
   color: var(--tm-color-primary);
@@ -254,6 +256,7 @@
   display: block;
   font-size: var(--tm-fs-small);
   font-weight: var(--tm-fw-semibold);
+  margin-bottom: 2px;
 }
 
 .tm-trust-item__description {

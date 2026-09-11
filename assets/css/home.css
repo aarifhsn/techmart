@@ -316,10 +316,23 @@
 }
 
 /* ---------- Why Shop With Us ---------- */
+/* ---------- Why Shop With Us ---------- */
+.tm-why-shop {
+  background: var(--tm-color-surface);
+  border-radius: var(--tm-radius-lg);
+  padding-bottom: var(--tm-space-8);
+}
+
 .tm-why-shop__grid {
   display: grid;
   grid-template-columns: repeat(5, 1fr);
   gap: var(--tm-space-6);
+}
+
+.tm-why-shop__title {
+  text-align: center;
+  margin-bottom: var(--tm-space-12);
+  font-size: var(--tm-fs-h2);
 }
 
 /* ---------- Brands ---------- */

@@ -55,7 +55,7 @@
   position: relative; /* anchors the category drawer's absolute position */
   display: flex;
   align-items: center;
-  gap: var(--tm-space-6);
+  gap: var(--tm-space-12);
   padding-block: var(--tm-space-4);
 }
 

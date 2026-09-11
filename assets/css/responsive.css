@@ -7,329 +7,329 @@
 
 /* ---------- Tablet and below: <1024px ---------- */
 @media (max-width: 1023px) {
-	.tm-header__inner {
-		gap: var(--tm-space-4);
-	}
+  .tm-header__inner {
+    gap: var(--tm-space-4);
+  }
 
-	.tm-header__utility-label {
-		display: none;
-	}
+  .tm-header__utility-label {
+    display: none;
+  }
 
-	/*
+  /*
 	 * Off-canvas panel instead of a dropdown below the toggle.
 	 * Same markup as desktop (template-parts/header/category-drawer.php) —
 	 * only the positioning strategy changes here.
 	 */
-	.tm-category-drawer {
-		position: fixed;
-		inset: 0 auto 0 0;
-		width: min(320px, 85vw);
-		height: 100vh;
-		margin: 0;
-		border: none;
-		border-radius: 0;
-	}
+  .tm-category-drawer {
+    position: fixed;
+    inset: 0 auto 0 0;
+    width: min(320px, 85vw);
+    height: 100vh;
+    margin: 0;
+    border: none;
+    border-radius: 0;
+  }
 
-	.tm-category-drawer__list {
-		max-height: none;
-	}
+  .tm-category-drawer__list {
+    max-height: none;
+  }
 
-	.tm-primary-nav .tm-nav__list {
-		flex-wrap: nowrap;
-		overflow-x: auto;
-		-webkit-overflow-scrolling: touch;
-	}
+  .tm-primary-nav .tm-nav__list {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
 
-	/* ---------- Home: tablet ---------- */
-	.tm-hero__layout {
-		display: flex;
-		flex-direction: column;
-	}
+  /* ---------- Home: tablet ---------- */
+  .tm-hero__layout {
+    display: flex;
+    flex-direction: column;
+  }
 
-	.tm-hero__nav {
-		order: 1;
-	}
+  .tm-hero__nav {
+    order: 1;
+  }
 
-	.tm-hero__banner-card {
-		order: 2;
-	}
+  .tm-hero__banner-card {
+    order: 2;
+  }
 
-	.tm-hero__sidebar {
-		order: 3;
-	}
+  .tm-hero__sidebar {
+    order: 3;
+  }
 
-	.tm-hero__nav .tm-nav__list {
-		flex-wrap: nowrap;
-		overflow-x: auto;
-		-webkit-overflow-scrolling: touch;
-	}
+  .tm-hero__nav .tm-nav__list {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
 
-	.tm-hero__inner {
-		gap: var(--tm-space-8);
-		padding-block: var(--tm-space-10);
-	}
+  .tm-hero__inner {
+    gap: var(--tm-space-8);
+    padding-block: var(--tm-space-10);
+  }
 
-	.tm-hero__heading {
-		font-size: var(--tm-fs-h1);
-	}
+  .tm-hero__heading {
+    font-size: var(--tm-fs-h1);
+  }
 
-	.tm-hero__trust-strip-inner {
-		grid-template-columns: repeat(2, 1fr);
-		row-gap: var(--tm-space-4);
-	}
+  .tm-hero__trust-strip-inner {
+    grid-template-columns: repeat(2, 1fr);
+    row-gap: var(--tm-space-4);
+  }
 
-	.tm-hero__trust-strip-inner .tm-trust-item:nth-child(3) {
-		border-left: none;
-		padding-left: 0;
-	}
+  .tm-hero__trust-strip-inner .tm-trust-item:nth-child(3) {
+    border-left: none;
+    padding-left: 0;
+  }
 
-	.tm-categories__grid {
-		grid-template-columns: repeat(4, 1fr);
-	}
+  .tm-categories__grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
 
-	/* ---------- Product grid: tablet ---------- */
-	.tm-product-grid,
-	.products {
-		grid-template-columns: repeat(3, 1fr);
-	}
+  /* ---------- Product grid: tablet ---------- */
+  .tm-product-grid,
+  .products {
+    grid-template-columns: repeat(3, 1fr);
+  }
 
-	/* ---------- Shop layout: tablet and below ---------- */
-	.tm-shop__layout {
-		grid-template-columns: 1fr;
-	}
+  /* ---------- Shop layout: tablet and below ---------- */
+  .tm-shop__layout {
+    grid-template-columns: 1fr;
+  }
 
-	.tm-filter-toggle {
-		display: inline-flex;
-	}
+  .tm-filter-toggle {
+    display: inline-flex;
+  }
 
-	.tm-shop__sidebar {
-		position: fixed;
-		inset: 0 auto 0 0;
-		width: min(320px, 85vw);
-		height: 100vh;
-		overflow-y: auto;
-		background: var(--tm-color-white);
-		padding: var(--tm-space-6);
-		box-shadow: var(--tm-shadow-lg);
-		z-index: 1000;
-		transform: translateX(-100%);
-		transition: transform var(--tm-transition-base);
-	}
+  .tm-shop__sidebar {
+    position: fixed;
+    inset: 0 auto 0 0;
+    width: min(320px, 85vw);
+    height: 100vh;
+    overflow-y: auto;
+    background: var(--tm-color-white);
+    padding: var(--tm-space-6);
+    box-shadow: var(--tm-shadow-lg);
+    z-index: 1000;
+    transform: translateX(-100%);
+    transition: transform var(--tm-transition-base);
+  }
 
-	.tm-shop__sidebar.is-open {
-		transform: translateX(0);
-	}
+  .tm-shop__sidebar.is-open {
+    transform: translateX(0);
+  }
 
-	/* ---------- Promo / Why Shop / Brands: tablet ---------- */
-	.tm-promo__inner {
-		padding: var(--tm-space-8);
-	}
+  /* ---------- Promo / Why Shop / Brands: tablet ---------- */
+  .tm-promo__inner {
+    padding: var(--tm-space-8);
+  }
 
-	.tm-why-shop__grid {
-		grid-template-columns: repeat(3, 1fr);
-		row-gap: var(--tm-space-8);
-	}
+  .tm-why-shop__grid {
+    grid-template-columns: repeat(3, 1fr);
+    row-gap: var(--tm-space-8);
+  }
 
-	.tm-brands__grid {
-		grid-template-columns: repeat(4, 1fr);
-	}
+  .tm-brands__grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
 
-	/* ---------- Footer: tablet ---------- */
-	.tm-footer__grid {
-		grid-template-columns: repeat(2, 1fr);
-		row-gap: var(--tm-space-8);
-	}
+  /* ---------- Footer: tablet ---------- */
+  .tm-footer__grid {
+    grid-template-columns: repeat(2, 1fr);
+    row-gap: var(--tm-space-8);
+  }
 
-	.tm-footer__brand {
-		grid-column: 1 / -1;
-	}
+  .tm-footer__brand {
+    grid-column: 1 / -1;
+  }
 
-	/* ---------- Single product: tablet and below ---------- */
-	.product {
-		grid-template-columns: 1fr;
-		gap: var(--tm-space-6);
-	}
+  /* ---------- Single product: tablet and below ---------- */
+  .product {
+    grid-template-columns: 1fr;
+    gap: var(--tm-space-6);
+  }
 
-	.tm-sticky-bar:not([hidden]) {
-		display: block;
-	}
+  .tm-sticky-bar:not([hidden]) {
+    display: block;
+  }
 
-	/* ---------- Checkout / Account: tablet and below ---------- */
-	.woocommerce-checkout {
-		grid-template-columns: 1fr;
-	}
+  /* ---------- Checkout / Account: tablet and below ---------- */
+  .woocommerce-checkout {
+    grid-template-columns: 1fr;
+  }
 
-	.woocommerce-billing-fields,
-	.woocommerce-shipping-fields,
-	.woocommerce-additional-fields,
-	#order_review {
-		grid-column: 1;
-		grid-row: auto;
-	}
+  .woocommerce-billing-fields,
+  .woocommerce-shipping-fields,
+  .woocommerce-additional-fields,
+  #order_review {
+    grid-column: 1;
+    grid-row: auto;
+  }
 
-	.woocommerce-account .woocommerce {
-		grid-template-columns: 1fr;
-	}
+  .woocommerce-account .woocommerce {
+    grid-template-columns: 1fr;
+  }
 
-	.woocommerce-MyAccount-navigation ul {
-		flex-direction: row;
-		flex-wrap: wrap;
-	}
+  .woocommerce-MyAccount-navigation ul {
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
 }
 
 /* Applied to <body> by app.js while the mobile off-canvas drawer is open. */
 .tm-scroll-lock {
-	overflow: hidden;
+  overflow: hidden;
 }
 
 /* ---------- Mobile: <768px ---------- */
 @media (max-width: 767px) {
-	.tm-header__inner {
-		flex-wrap: wrap;
-	}
+  .tm-header__inner {
+    flex-wrap: wrap;
+  }
 
-	.tm-header__logo {
-		flex: 1 1 auto;
-	}
+  .tm-header__logo {
+    flex: 1 1 auto;
+  }
 
-	/* Search drops to its own full-width row below logo/toggle/utility,
+  /* Search drops to its own full-width row below logo/toggle/utility,
 	   giving it room without needing a separate expand/collapse toggle. */
-	.tm-search {
-		order: 3;
-		flex-basis: 100%;
-	}
+  .tm-search {
+    order: 3;
+    flex-basis: 100%;
+  }
 
-	/* Category filtering stays available via the drawer; dropping it
+  /* Category filtering stays available via the drawer; dropping it
 	   here keeps the mobile search row from getting cramped. */
-	.tm-search__category {
-		display: none;
-	}
+  .tm-search__category {
+    display: none;
+  }
 
-	.tm-header__utility {
-		gap: var(--tm-space-4);
-	}
+  .tm-header__utility {
+    gap: var(--tm-space-4);
+  }
 
-	/* ---------- Home: mobile ---------- */
-	.tm-hero__inner {
-		grid-template-columns: 1fr;
-		padding-block: var(--tm-space-8);
-	}
+  /* ---------- Home: mobile ---------- */
+  .tm-hero__inner {
+    grid-template-columns: 1fr;
+    padding-block: var(--tm-space-8);
+  }
 
-	.tm-hero__actions {
-		flex-wrap: wrap;
-	}
+  .tm-hero__actions {
+    flex-wrap: wrap;
+  }
 
-	.tm-hero__trust-strip-inner {
-		grid-template-columns: 1fr;
-		gap: var(--tm-space-4);
-		padding: var(--tm-space-5);
-	}
+  .tm-hero__trust-strip-inner {
+    grid-template-columns: 1fr;
+    gap: var(--tm-space-4);
+    padding: var(--tm-space-5);
+  }
 
-	.tm-hero__trust-strip-inner .tm-trust-item {
-		border-left: none;
-		padding-left: 0;
-	}
+  .tm-hero__trust-strip-inner .tm-trust-item {
+    border-left: none;
+    padding-left: 0;
+  }
 
-	.tm-categories__grid {
-		grid-template-columns: repeat(3, 1fr);
-		gap: var(--tm-space-4);
-	}
+  .tm-categories__grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--tm-space-4);
+  }
 
-	/* ---------- Product grid: mobile ---------- */
-	.tm-product-grid,
-	.products {
-		grid-template-columns: repeat(2, 1fr);
-		gap: var(--tm-space-4);
-	}
+  /* ---------- Product grid: mobile ---------- */
+  .tm-product-grid,
+  .products {
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--tm-space-4);
+  }
 
-	/* ---------- Promo / Why Shop / Brands / Newsletter: mobile ---------- */
-	.tm-promo__inner {
-		flex-direction: column;
-		align-items: flex-start;
-		padding: var(--tm-space-6);
-	}
+  /* ---------- Promo / Why Shop / Brands / Newsletter: mobile ---------- */
+  .tm-promo__inner {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: var(--tm-space-6);
+  }
 
-	.tm-promo__media {
-		max-width: 100%;
-	}
+  .tm-promo__media {
+    max-width: 100%;
+  }
 
-	.tm-promo__badge {
-		top: var(--tm-space-4);
-		right: var(--tm-space-4);
-		width: 64px;
-		height: 64px;
-	}
+  .tm-promo__badge {
+    top: var(--tm-space-4);
+    right: var(--tm-space-4);
+    width: 64px;
+    height: 64px;
+  }
 
-	.tm-why-shop__grid {
-		grid-template-columns: repeat(2, 1fr);
-	}
+  .tm-why-shop__grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
 
-	.tm-brands__grid {
-		grid-template-columns: repeat(3, 1fr);
-	}
+  .tm-brands__grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
 
-	.tm-newsletter__inner {
-		flex-direction: column;
-		align-items: stretch;
-		text-align: center;
-	}
+  .tm-newsletter__inner {
+    flex-direction: column;
+    align-items: stretch;
+    text-align: center;
+  }
 
-	.tm-newsletter__form {
-		flex-basis: 100%;
-	}
+  .tm-newsletter__form {
+    flex-basis: 100%;
+  }
 
-	/* ---------- Footer: mobile ---------- */
-	.tm-footer__grid {
-		grid-template-columns: 1fr;
-		gap: var(--tm-space-8);
-	}
+  /* ---------- Footer: mobile ---------- */
+  .tm-footer__grid {
+    grid-template-columns: 1fr;
+    gap: var(--tm-space-8);
+  }
 
-	.tm-footer__brand {
-		grid-column: auto;
-	}
+  .tm-footer__brand {
+    grid-column: auto;
+  }
 
-	.tm-footer__bottom-inner {
-		flex-direction: column;
-		text-align: center;
-	}
+  .tm-footer__bottom-inner {
+    flex-direction: column;
+    text-align: center;
+  }
 
-	/* ---------- Single product: mobile ---------- */
-	.woocommerce-tabs ul.tabs {
-		gap: var(--tm-space-4);
-		overflow-x: auto;
-		-webkit-overflow-scrolling: touch;
-	}
+  /* ---------- Single product: mobile ---------- */
+  .woocommerce-tabs ul.tabs {
+    gap: var(--tm-space-4);
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
 
-	.cart {
-		align-items: stretch;
-	}
+  .cart {
+    align-items: stretch;
+  }
 
-	.single_add_to_cart_button {
-		flex: 1 1 auto;
-		text-align: center;
-	}
+  .single_add_to_cart_button {
+    flex: 1 1 auto;
+    text-align: center;
+  }
 
-	/* ---------- Cart / Checkout: mobile ---------- */
-	.cart .actions {
-		flex-direction: column;
-		align-items: stretch;
-	}
+  /* ---------- Cart / Checkout: mobile ---------- */
+  .cart .actions {
+    flex-direction: column;
+    align-items: stretch;
+  }
 
-	.coupon {
-		flex-direction: column;
-	}
+  .coupon {
+    flex-direction: column;
+  }
 
-	.cart-collaterals {
-		justify-content: stretch;
-	}
+  .cart-collaterals {
+    justify-content: stretch;
+  }
 
-	.cart_totals {
-		max-width: 100%;
-	}
+  .cart_totals {
+    max-width: 100%;
+  }
 
-	.form-row-first,
-	.form-row-last {
-		width: 100%;
-		margin-right: 0;
-	}
+  .form-row-first,
+  .form-row-last {
+    width: 100%;
+    margin-right: 0;
+  }
 }

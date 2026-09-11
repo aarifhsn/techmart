@@ -13,7 +13,7 @@
  * @package TechMart
  */
 
-if ( ! defined( 'ABSPATH' ) ) {
+if (!defined('ABSPATH')) {
 	exit;
 }
 
@@ -21,41 +21,44 @@ $items = apply_filters(
 	'techmart_trust_items',
 	array(
 		array(
-			'icon'        => 'shield',
-			'title'       => __( 'Genuine Products', 'techmart' ),
-			'description' => __( '100% authentic items', 'techmart' ),
+			'icon' => 'shield',
+			'title' => __('Genuine Products', 'techmart'),
+			'description' => __('100% authentic items', 'techmart'),
 		),
 		array(
-			'icon'        => 'tag',
-			'title'       => __( 'Best Price Guaranteed', 'techmart' ),
-			'description' => __( 'We beat any price', 'techmart' ),
+			'icon' => 'tag',
+			'title' => __('Best Price Guaranteed', 'techmart'),
+			'description' => __('We beat any price', 'techmart'),
 		),
 		array(
-			'icon'        => 'truck',
-			'title'       => __( 'Fast & Free Shipping', 'techmart' ),
-			'description' => __( 'On orders over $99', 'techmart' ),
+			'icon' => 'truck',
+			'title' => __('Fast & Free Shipping', 'techmart'),
+			'description' => __('On orders over $99', 'techmart'),
 		),
 		array(
-			'icon'        => 'refresh',
-			'title'       => __( 'Easy Returns', 'techmart' ),
-			'description' => __( '30 days return policy', 'techmart' ),
+			'icon' => 'refresh',
+			'title' => __('Easy Returns', 'techmart'),
+			'description' => __('30 days return policy', 'techmart'),
 		),
 		array(
-			'icon'        => 'lock',
-			'title'       => __( 'Secure Checkout', 'techmart' ),
-			'description' => __( 'Your data is protected', 'techmart' ),
+			'icon' => 'lock',
+			'title' => __('Secure Checkout', 'techmart'),
+			'description' => __('Your data is protected', 'techmart'),
 		),
 	)
 );
 
-if ( empty( $items ) ) {
+if (empty($items)) {
 	return;
 }
 ?>
-<section class="tm-why-shop tm-band" aria-label="<?php esc_attr_e( 'Why shop with us', 'techmart' ); ?>">
-	<div class="tm-container tm-why-shop__grid">
-		<?php foreach ( $items as $item ) : ?>
-			<?php techmart_get_template_part( 'template-parts/components/trust-item', null, $item ); ?>
-		<?php endforeach; ?>
+<section class="tm-why-shop tm-band" aria-label="<?php esc_attr_e('Why shop with us', 'techmart'); ?>">
+	<div class="tm-container">
+		<h2 class="tm-why-shop__title"><?php esc_html_e('Why Shop With Us', 'techmart'); ?></h2>
+		<div class="tm-why-shop__grid">
+			<?php foreach ($items as $item): ?>
+				<?php techmart_get_template_part('template-parts/components/trust-item', null, $item); ?>
+			<?php endforeach; ?>
+		</div>
 	</div>
 </section>
