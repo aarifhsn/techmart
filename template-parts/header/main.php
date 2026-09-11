@@ -31,7 +31,7 @@ $account_url = function_exists( 'wc_get_page_permalink' ) ? wc_get_page_permalin
 		aria-controls="tm-category-drawer"
 	>
 		<?php techmart_icon( 'menu' ); ?>
-		<span><?php esc_html_e( 'All Categories', 'techmart' ); ?></span>
+		<span class="screen-reader-text"><?php esc_html_e( 'All Categories', 'techmart' ); ?></span>
 	</button>
 
 	<?php get_template_part( 'template-parts/header/search-form' ); ?>

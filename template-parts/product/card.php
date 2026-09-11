@@ -61,16 +61,20 @@ $rating_count = $product->get_rating_count();
 
 		<?php
 		/**
-		 * Wishlist integration point (§25) — see inc/woocommerce.php. No
-		 * bespoke wishlist backend; a wishlist plugin's JS binds to
-		 * .tm-wishlist-toggle and owns the aria-pressed/active state.
+		 * Wishlist toggle. Real functionality now lives in
+		 * inc/wishlist.php (session/user-meta storage + AJAX), bound to
+		 * .tm-wishlist-toggle buttons by initWishlistToggles() in
+		 * assets/js/app.js. Initial aria-pressed reflects the visitor's
+		 * actual saved state so a fresh page load is never wrong before
+		 * any click happens.
 		 */
+		$in_wishlist = techmart_is_in_wishlist( $product->get_id() );
 		?>
 		<button
 			type="button"
 			class="tm-wishlist-toggle tm-product-card__wishlist"
 			data-product-id="<?php echo esc_attr( $product->get_id() ); ?>"
-			aria-pressed="false"
+			aria-pressed="<?php echo $in_wishlist ? 'true' : 'false'; ?>"
 		>
 			<?php techmart_icon( 'heart' ); ?>
 			<span class="screen-reader-text"><?php esc_html_e( 'Add to wishlist', 'techmart' ); ?></span>

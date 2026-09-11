@@ -11,11 +11,6 @@
 		gap: var(--tm-space-4);
 	}
 
-	/* Icon-only toggle; it still opens the same drawer. */
-	.tm-category-toggle span {
-		display: none;
-	}
-
 	.tm-header__utility-label {
 		display: none;
 	}
@@ -46,6 +41,29 @@
 	}
 
 	/* ---------- Home: tablet ---------- */
+	.tm-hero__layout {
+		display: flex;
+		flex-direction: column;
+	}
+
+	.tm-hero__nav {
+		order: 1;
+	}
+
+	.tm-hero__banner-card {
+		order: 2;
+	}
+
+	.tm-hero__sidebar {
+		order: 3;
+	}
+
+	.tm-hero__nav .tm-nav__list {
+		flex-wrap: nowrap;
+		overflow-x: auto;
+		-webkit-overflow-scrolling: touch;
+	}
+
 	.tm-hero__inner {
 		gap: var(--tm-space-8);
 		padding-block: var(--tm-space-10);
@@ -204,6 +222,7 @@
 	.tm-hero__trust-strip-inner {
 		grid-template-columns: 1fr;
 		gap: var(--tm-space-4);
+		padding: var(--tm-space-5);
 	}
 
 	.tm-hero__trust-strip-inner .tm-trust-item {

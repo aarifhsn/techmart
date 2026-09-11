@@ -18,79 +18,81 @@
  * SIL Open Font License — see assets/fonts/LICENSE.txt.
  */
 @font-face {
-	font-family: 'Inter';
-	font-style: normal;
-	font-weight: 100 900;
-	font-display: swap;
-	src: url('../fonts/InterVariable.woff2') format('woff2');
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 100 900;
+  font-display: swap;
+  src: url("../fonts/InterVariable.woff2") format("woff2");
 }
 
 @font-face {
-	font-family: 'Inter';
-	font-style: italic;
-	font-weight: 100 900;
-	font-display: swap;
-	src: url('../fonts/InterVariable-Italic.woff2') format('woff2');
+  font-family: "Inter";
+  font-style: italic;
+  font-weight: 100 900;
+  font-display: swap;
+  src: url("../fonts/InterVariable-Italic.woff2") format("woff2");
 }
 
 :root {
-	/* Color */
-	--tm-color-primary: #5146D8;
-	--tm-color-primary-hover: #4338B8;
-	--tm-color-dark: #111318;
-	--tm-color-body: #555B66;
-	--tm-color-surface: #F6F7FB;
-	--tm-color-border: #E6E8EE;
-	--tm-color-success: #16A34A;
-	--tm-color-sale: #EF4444;
-	--tm-color-accent: #22C7E8;
-	--tm-color-white: #FFFFFF;
+  /* Color */
+  --tm-color-primary: #5146d8;
+  --tm-color-primary-hover: #4338b8;
+  --tm-color-dark: #111318;
+  --tm-color-body: #555b66;
+  --tm-color-surface: #f6f7fb;
+  --tm-color-border: #e6e8ee;
+  --tm-color-success: #16a34a;
+  --tm-color-sale: #ef4444;
+  --tm-color-accent: #22c7e8;
+  --tm-color-white: #ffffff;
 
-	/* Typography */
-	--tm-font-base: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-	--tm-fw-regular: 400;
-	--tm-fw-semibold: 600;
-	--tm-fw-bold: 700;
+  /* Typography */
+  --tm-font-base:
+    "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --tm-fw-regular: 400;
+  --tm-fw-semibold: 600;
+  --tm-fw-bold: 700;
 
-	--tm-fs-small: 0.875rem;
-	--tm-fs-body: 1rem;
-	--tm-fs-h3: 1.25rem;
-	--tm-fs-h2: 1.75rem;
-	--tm-fs-h1: 2.5rem;
-	--tm-fs-display: 3rem;
+  --tm-fs-xs: 0.75rem;
+  --tm-fs-small: 0.875rem;
+  --tm-fs-body: 1rem;
+  --tm-fs-h3: 1.25rem;
+  --tm-fs-h2: 1.75rem;
+  --tm-fs-h1: 2.5rem;
+  --tm-fs-display: 2.5rem;
 
-	/* Layout */
-	--tm-container-width: 1200px;
-	--tm-container-gutter: 20px;
+  /* Layout */
+  --tm-container-width: 1280px;
+  --tm-container-gutter: 20px;
 
-	/* Spacing scale — use these everywhere; avoid one-off px values
+  /* Spacing scale — use these everywhere; avoid one-off px values
 	   (see architecture doc §4) unless a design genuinely requires it. */
-	--tm-space-1: 4px;
-	--tm-space-2: 8px;
-	--tm-space-3: 12px;
-	--tm-space-4: 16px;
-	--tm-space-5: 20px;
-	--tm-space-6: 24px;
-	--tm-space-8: 32px;
-	--tm-space-10: 40px;
-	--tm-space-12: 48px;
-	--tm-space-16: 64px;
-	--tm-space-20: 80px;
+  --tm-space-1: 4px;
+  --tm-space-2: 8px;
+  --tm-space-3: 12px;
+  --tm-space-4: 16px;
+  --tm-space-5: 20px;
+  --tm-space-6: 24px;
+  --tm-space-8: 32px;
+  --tm-space-10: 40px;
+  --tm-space-12: 48px;
+  --tm-space-16: 64px;
+  --tm-space-20: 80px;
 
-	/* Radius */
-	--tm-radius-sm: 6px;
-	--tm-radius-md: 10px;
-	--tm-radius-lg: 16px;
-	--tm-radius-pill: 999px;
+  /* Radius */
+  --tm-radius-sm: 6px;
+  --tm-radius-md: 10px;
+  --tm-radius-lg: 16px;
+  --tm-radius-pill: 999px;
 
-	/* Shadow — used sparingly (see §42: avoid excessive shadows) */
-	--tm-shadow-sm: 0 1px 2px rgba(17, 19, 24, 0.06);
-	--tm-shadow-md: 0 4px 12px rgba(17, 19, 24, 0.08);
-	--tm-shadow-lg: 0 12px 32px rgba(17, 19, 24, 0.12);
+  /* Shadow — used sparingly (see §42: avoid excessive shadows) */
+  --tm-shadow-sm: 0 1px 2px rgba(17, 19, 24, 0.06);
+  --tm-shadow-md: 0 4px 12px rgba(17, 19, 24, 0.08);
+  --tm-shadow-lg: 0 12px 32px rgba(17, 19, 24, 0.12);
 
-	/* Motion */
-	--tm-transition-fast: 150ms ease;
-	--tm-transition-base: 200ms ease;
+  /* Motion */
+  --tm-transition-fast: 150ms ease;
+  --tm-transition-base: 200ms ease;
 }
 
 /*
@@ -108,54 +110,54 @@
 *,
 *::before,
 *::after {
-	box-sizing: border-box;
+  box-sizing: border-box;
 }
 
 html {
-	-webkit-text-size-adjust: 100%;
+  -webkit-text-size-adjust: 100%;
 }
 
 body {
-	margin: 0;
-	font-family: var(--tm-font-base);
-	font-size: var(--tm-fs-body);
-	font-weight: var(--tm-fw-regular);
-	line-height: 1.55;
-	color: var(--tm-color-body);
-	background: var(--tm-color-white);
+  margin: 0;
+  font-family: var(--tm-font-base);
+  font-size: var(--tm-fs-small);
+  font-weight: var(--tm-fw-regular);
+  line-height: 1.55;
+  color: var(--tm-color-body);
+  background: var(--tm-color-white);
 }
 
 img,
 picture,
 svg {
-	max-width: 100%;
-	display: block;
+  max-width: 100%;
+  display: block;
 }
 
 button,
 input,
 select,
 textarea {
-	font: inherit;
-	color: inherit;
+  font: inherit;
+  color: inherit;
 }
 
 button {
-	background: none;
-	border: none;
-	cursor: pointer;
+  background: none;
+  border: none;
+  cursor: pointer;
 }
 
 a {
-	color: inherit;
-	text-decoration: none;
+  color: inherit;
+  text-decoration: none;
 }
 
 ul,
 ol {
-	margin: 0;
-	padding: 0;
-	list-style: none;
+  margin: 0;
+  padding: 0;
+  list-style: none;
 }
 
 /* ---------- Typography ---------- */
@@ -165,43 +167,43 @@ h3,
 h4,
 h5,
 h6 {
-	margin: 0 0 var(--tm-space-4);
-	color: var(--tm-color-dark);
-	font-weight: var(--tm-fw-bold);
-	line-height: 1.25;
+  margin: 0 0 var(--tm-space-4);
+  color: var(--tm-color-dark);
+  font-weight: var(--tm-fw-bold);
+  line-height: 1.25;
 }
 
 h1 {
-	font-size: var(--tm-fs-h1);
+  font-size: var(--tm-fs-h1);
 }
 
 h2 {
-	font-size: var(--tm-fs-h2);
+  font-size: var(--tm-fs-h2);
 }
 
 h3 {
-	font-size: var(--tm-fs-h3);
-	font-weight: var(--tm-fw-semibold);
+  font-size: var(--tm-fs-h3);
+  font-weight: var(--tm-fw-semibold);
 }
 
 .tm-display {
-	font-size: var(--tm-fs-display);
-	font-weight: var(--tm-fw-bold);
-	color: var(--tm-color-dark);
+  font-size: var(--tm-fs-display);
+  font-weight: var(--tm-fw-bold);
+  color: var(--tm-color-dark);
 }
 
 .tm-label {
-	font-size: var(--tm-fs-small);
-	font-weight: var(--tm-fw-semibold);
+  font-size: var(--tm-fs-small);
+  font-weight: var(--tm-fw-semibold);
 }
 
 .tm-price {
-	font-weight: var(--tm-fw-bold);
-	color: var(--tm-color-dark);
+  font-weight: var(--tm-fw-bold);
+  color: var(--tm-color-dark);
 }
 
 p {
-	margin: 0 0 var(--tm-space-4);
+  margin: 0 0 var(--tm-space-4);
 }
 
 /* ---------- Container system ---------- */
@@ -213,63 +215,63 @@ p {
  * .tm-container inside for the constrained content — see §9/§16.
  */
 .tm-container {
-	width: 100%;
-	max-width: var(--tm-container-width);
-	margin-inline: auto;
-	padding-inline: var(--tm-container-gutter);
+  width: 100%;
+  max-width: var(--tm-container-width);
+  margin-inline: auto;
+  padding-inline: var(--tm-container-gutter);
 }
 
 .tm-band > .tm-container {
-	padding-block: var(--tm-space-6);
+  padding-block: var(--tm-space-6);
 }
 
 .tm-main {
-	padding-block: var(--tm-space-10);
+  padding-block: var(--tm-space-10);
 }
 
 /* ---------- Accessibility utilities ---------- */
 .screen-reader-text {
-	border: 0;
-	clip: rect(1px, 1px, 1px, 1px);
-	clip-path: inset(50%);
-	height: 1px;
-	margin: -1px;
-	overflow: hidden;
-	padding: 0;
-	position: absolute;
-	width: 1px;
-	word-wrap: normal !important;
+  border: 0;
+  clip: rect(1px, 1px, 1px, 1px);
+  clip-path: inset(50%);
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  padding: 0;
+  position: absolute;
+  width: 1px;
+  word-wrap: normal !important;
 }
 
 .screen-reader-text:focus {
-	background: var(--tm-color-white);
-	border-radius: var(--tm-radius-sm);
-	box-shadow: var(--tm-shadow-md);
-	clip: auto !important;
-	clip-path: none;
-	color: var(--tm-color-dark);
-	display: block;
-	height: auto;
-	left: var(--tm-space-4);
-	top: var(--tm-space-4);
-	padding: var(--tm-space-3) var(--tm-space-4);
-	text-decoration: none;
-	width: auto;
-	z-index: 100000;
+  background: var(--tm-color-white);
+  border-radius: var(--tm-radius-sm);
+  box-shadow: var(--tm-shadow-md);
+  clip: auto !important;
+  clip-path: none;
+  color: var(--tm-color-dark);
+  display: block;
+  height: auto;
+  left: var(--tm-space-4);
+  top: var(--tm-space-4);
+  padding: var(--tm-space-3) var(--tm-space-4);
+  text-decoration: none;
+  width: auto;
+  z-index: 100000;
 }
 
 :focus-visible {
-	outline: 2px solid var(--tm-color-primary);
-	outline-offset: 2px;
+  outline: 2px solid var(--tm-color-primary);
+  outline-offset: 2px;
 }
 
 @media (prefers-reduced-motion: reduce) {
-	*,
-	*::before,
-	*::after {
-		animation-duration: 0.01ms !important;
-		animation-iteration-count: 1 !important;
-		transition-duration: 0.01ms !important;
-		scroll-behavior: auto !important;
-	}
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }

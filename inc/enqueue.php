@@ -39,10 +39,16 @@ function techmart_enqueue_assets() {
 
 	/**
 	 * Product-card and single-product styling. Loaded on shop/category/tag
-	 * archives, cart, checkout, and the homepage (which embeds product
-	 * cards in Trending/Best Sellers/Weekly Deals).
+	 * archives, cart, checkout, the homepage (which embeds product cards
+	 * in Trending/Best Sellers/Weekly Deals), and the Wishlist page —
+	 * detected by its shortcode rather than assumed by slug, since an
+	 * admin can put [techmart_wishlist] on any page they choose (see
+	 * inc/customizer.php's page picker).
 	 */
-	if ( function_exists( 'is_woocommerce' ) && ( is_woocommerce() || is_cart() || is_checkout() || is_front_page() ) ) {
+	$queried_post           = is_singular() ? get_post() : null;
+	$has_wishlist_shortcode = $queried_post && has_shortcode( $queried_post->post_content, 'techmart_wishlist' );
+
+	if ( function_exists( 'is_woocommerce' ) && ( is_woocommerce() || is_cart() || is_checkout() || is_front_page() || $has_wishlist_shortcode ) ) {
 		wp_enqueue_style( 'techmart-product', TECHMART_URI . '/assets/css/product.css', array( 'techmart-base' ), TECHMART_VERSION );
 	}
 
@@ -104,6 +110,20 @@ function techmart_enqueue_assets() {
 		array(
 			'strategy'  => 'defer',
 			'in_footer' => true,
+		)
+	);
+
+	/**
+	 * Data for app.js's wishlist toggle handler (initWishlistToggles()).
+	 * The nonce is scoped to 'techmart_wishlist' and checked server-side
+	 * in techmart_ajax_toggle_wishlist() (inc/wishlist.php).
+	 */
+	wp_localize_script(
+		'techmart-app',
+		'techmartData',
+		array(
+			'ajaxUrl'       => admin_url( 'admin-ajax.php' ),
+			'wishlistNonce' => wp_create_nonce( 'techmart_wishlist' ),
 		)
 	);
 

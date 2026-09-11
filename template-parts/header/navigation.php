@@ -11,11 +11,21 @@
  * 1024px (see responsive.css) — every link stays reachable, with no
  * extra JS and no extra state to manage.
  *
+ * Skips itself entirely on the front page: the reference design has
+ * this menu aligned with the category sidebar's heading, not as its
+ * own full-width row — template-parts/home/hero-nav.php renders the
+ * same 'primary' menu in that position instead. Every other page (no
+ * sidebar to align with) keeps this normal full-width row.
+ *
  * @package TechMart
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
+}
+
+if ( is_front_page() ) {
+	return;
 }
 
 if ( ! has_nav_menu( 'primary' ) ) {

@@ -17,6 +17,7 @@
 	initCategoryDrawer();
 	initFilterDrawer();
 	initMiniCart();
+	initWishlistToggles();
 
 	/**
 	 * Category toggle + drawer.
@@ -230,5 +231,111 @@
 				openDropdown();
 			}
 		} );
+	}
+
+	/**
+	 * Wishlist toggle buttons (post-launch addition).
+	 *
+	 * Talks to techmart_ajax_toggle_wishlist() in inc/wishlist.php.
+	 * A single product can appear in more than one .tm-wishlist-toggle
+	 * on the same page (e.g. the same product in both Trending and Best
+	 * Sellers), so every matching button — not just the one clicked —
+	 * gets its state updated from one response.
+	 */
+	function initWishlistToggles() {
+		var toggles = document.querySelectorAll( '.tm-wishlist-toggle' );
+
+		if ( ! toggles.length || typeof techmartData === 'undefined' ) {
+			return;
+		}
+
+		toggles.forEach( function ( button ) {
+			button.addEventListener( 'click', function ( event ) {
+				event.preventDefault();
+
+				if ( button.disabled ) {
+					return;
+				}
+
+				var productId = button.getAttribute( 'data-product-id' );
+
+				if ( productId ) {
+					toggleWishlist( productId, button );
+				}
+			} );
+		} );
+
+		function toggleWishlist( productId, sourceButton ) {
+			sourceButton.disabled = true;
+
+			var formData = new FormData();
+			formData.append( 'action', 'techmart_toggle_wishlist' );
+			formData.append( 'product_id', productId );
+			formData.append( 'nonce', techmartData.wishlistNonce );
+
+			fetch( techmartData.ajaxUrl, {
+				method: 'POST',
+				credentials: 'same-origin',
+				body: formData,
+			} )
+				.then( function ( response ) {
+					return response.json();
+				} )
+				.then( function ( response ) {
+					if ( response && response.success ) {
+						updateButtons( productId, response.data.in_wishlist );
+						updateCount( response.data.count );
+					}
+				} )
+				.catch( function () {
+					// Silently no-op on a network failure — the button just
+					// stays in its current (pre-click) state, which is
+					// correct since nothing was actually saved.
+				} )
+				.finally( function () {
+					sourceButton.disabled = false;
+				} );
+		}
+
+		function updateButtons( productId, isActive ) {
+			document
+				.querySelectorAll( '.tm-wishlist-toggle[data-product-id="' + productId + '"]' )
+				.forEach( function ( button ) {
+					button.setAttribute( 'aria-pressed', isActive ? 'true' : 'false' );
+
+					// On the Wishlist page itself, removing an item should
+					// remove its whole card, not just un-fill the heart —
+					// there's no other reason for that card to be there.
+					if ( ! isActive ) {
+						var card = button.closest( '.tm-wishlist-page .tm-product-card' );
+						if ( card ) {
+							card.remove();
+						}
+					}
+				} );
+
+			maybeShowEmptyWishlistMessage();
+		}
+
+		function updateCount( count ) {
+			document.querySelectorAll( '.tm-wishlist-count' ).forEach( function ( el ) {
+				el.textContent = count;
+			} );
+		}
+
+		function maybeShowEmptyWishlistMessage() {
+			var page = document.querySelector( '.tm-wishlist-page' );
+
+			if ( ! page ) {
+				return;
+			}
+
+			var grid = page.querySelector( '.tm-product-grid' );
+			var empty = page.querySelector( '.tm-wishlist-page__empty' );
+
+			if ( empty && ( ! grid || ! grid.querySelector( '.tm-product-card' ) ) ) {
+				empty.hidden = false;
+			}
+		}
 	}
 } )();

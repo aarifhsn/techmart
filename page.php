@@ -17,7 +17,7 @@
  * @package TechMart
  */
 
-if ( ! defined( 'ABSPATH' ) ) {
+if (!defined('ABSPATH')) {
 	exit;
 }
 
@@ -28,29 +28,29 @@ get_header();
  * the shopping flow) but not on an arbitrary static page like "About
  * Us" — so it's shown only in the former case rather than on every page.
  */
-$show_breadcrumb = function_exists( 'is_woocommerce' ) && ( is_cart() || is_checkout() || is_account_page() );
+$show_breadcrumb = function_exists('is_woocommerce') && (is_cart() || is_checkout() || is_account_page());
 ?>
 
-	<main id="primary" class="tm-container tm-page">
-		<?php
-		while ( have_posts() ) :
-			the_post();
-			?>
+<main id="primary" class="tm-container tm-page">
+	<?php
+	while (have_posts()):
+		the_post();
+		?>
 
-			<?php if ( $show_breadcrumb ) : ?>
-				<nav class="tm-breadcrumb" aria-label="<?php esc_attr_e( 'Breadcrumb', 'techmart' ); ?>">
-					<?php woocommerce_breadcrumb(); ?>
-				</nav>
-			<?php endif; ?>
+		<?php if ($show_breadcrumb): ?>
+			<nav class="tm-breadcrumb" aria-label="<?php esc_attr_e('Breadcrumb', 'techmart'); ?>">
+				<?php woocommerce_breadcrumb(); ?>
+			</nav>
+		<?php endif; ?>
 
-			<h1 class="tm-page__title"><?php the_title(); ?></h1>
+		<h1 class="tm-page__title"><?php the_title(); ?></h1>
 
-			<div class="tm-page__content">
-				<?php the_content(); ?>
-			</div>
+		<div class="tm-page__content">
+			<?php the_content(); ?>
+		</div>
 
-		<?php endwhile; ?>
-	</main>
+	<?php endwhile; ?>
+</main>
 
 <?php
 get_footer();

@@ -83,30 +83,15 @@ function techmart_cart_fragments( $fragments ) {
 add_filter( 'woocommerce_add_to_cart_fragments', 'techmart_cart_fragments' );
 
 /**
- * Wishlist integration point.
- *
- * WooCommerce has no native wishlist. Per the brief (§25), the theme
- * does not invent a bespoke database-backed wishlist — instead it
- * exposes two filterable functions that a wishlist plugin (e.g. YITH
- * WooCommerce Wishlist) can hook into to report real data. Until such
- * a plugin is active, the count reads 0 and the link is inert ('#').
- *
- * A plugin (or a future lightweight custom implementation) integrates
- * by hooking these two filters — no template changes required:
- *
- *   add_filter( 'techmart_wishlist_count', function () { ... } );
- *   add_filter( 'techmart_wishlist_url', function () { ... } );
- *
- * The .tm-wishlist-toggle class on the header link (template-parts/
- * header/main.php) is reserved for that plugin's own JS to bind to.
+ * Wishlist: techmart_get_wishlist_count() and techmart_get_wishlist_url()
+ * used to be a stub here (Phase 2/4), reporting 0/'#' until a plugin
+ * like YITH hooked in — per the original brief (§25), which asked for
+ * an integration point rather than a bespoke backend. The client later
+ * asked for a real, self-contained wishlist instead of a plugin
+ * dependency, so the actual implementation now lives in
+ * inc/wishlist.php (storage, AJAX toggle, the [techmart_wishlist]
+ * shortcode) — this file no longer has any wishlist code of its own.
  */
-function techmart_get_wishlist_count() {
-	return (int) apply_filters( 'techmart_wishlist_count', 0 );
-}
-
-function techmart_get_wishlist_url() {
-	return apply_filters( 'techmart_wishlist_url', '#' );
-}
 
 /**
  * Trending Products query.
@@ -459,12 +444,14 @@ function techmart_single_product_wishlist_button() {
 	if ( ! $product instanceof WC_Product ) {
 		return;
 	}
+
+	$in_wishlist = techmart_is_in_wishlist( $product->get_id() );
 	?>
 	<button
 		type="button"
 		class="tm-wishlist-toggle tm-single-product__wishlist tm-button tm-button--secondary"
 		data-product-id="<?php echo esc_attr( $product->get_id() ); ?>"
-		aria-pressed="false"
+		aria-pressed="<?php echo $in_wishlist ? 'true' : 'false'; ?>"
 	>
 		<?php techmart_icon( 'heart' ); ?>
 		<?php esc_html_e( 'Add to Wishlist', 'techmart' ); ?>

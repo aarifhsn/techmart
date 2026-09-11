@@ -50,11 +50,11 @@ require TECHMART_DIR . '/inc/newsletter.php';
 require TECHMART_DIR . '/inc/performance.php';
 
 /**
- * inc/ajax.php, reserved since Phase 1, was never added: every
- * cart/wishlist-adjacent feature this theme built (the header cart
- * badge, the mini-cart dropdown) turned out to need only WooCommerce's
- * existing cart-fragments mechanism, not a custom AJAX endpoint of our
- * own. Left here as a note rather than silently dropped, in case a
- * genuine need for one comes up later — e.g. a custom-built wishlist
- * feature, if one is ever added instead of a plugin.
+ * Post-launch addition: a real, self-contained wishlist (session +
+ * user meta, AJAX toggle, a [techmart_wishlist] shortcode) — the
+ * client asked for this after launch instead of the plugin-integration
+ * point the original brief specified. This is the first thing in the
+ * theme to need admin-ajax.php, so it's also the first inc/ file
+ * registering AJAX actions.
  */
+require TECHMART_DIR . '/inc/wishlist.php';

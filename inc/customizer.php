@@ -302,5 +302,30 @@ function techmart_customize_register( $wp_customize ) {
 			)
 		);
 	}
+
+	$wp_customize->add_section(
+		'techmart_wishlist',
+		array(
+			'title'    => __( 'Wishlist', 'techmart' ),
+			'priority' => 50,
+		)
+	);
+
+	$wp_customize->add_setting(
+		'techmart_wishlist_page',
+		array(
+			'default'           => 0,
+			'sanitize_callback' => 'absint',
+		)
+	);
+	$wp_customize->add_control(
+		'techmart_wishlist_page',
+		array(
+			'label'       => __( 'Wishlist page', 'techmart' ),
+			'description' => __( 'Create a page containing the [techmart_wishlist] shortcode, then select it here — same pattern as WordPress\'s own Homepage/Posts page setting.', 'techmart' ),
+			'section'     => 'techmart_wishlist',
+			'type'        => 'dropdown-pages',
+		)
+	);
 }
 add_action( 'customize_register', 'techmart_customize_register' );
