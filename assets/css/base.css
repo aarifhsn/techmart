@@ -222,7 +222,7 @@ p {
 }
 
 .tm-band > .tm-container {
-  padding-block: var(--tm-space-6);
+  padding-block: var(--tm-space-2);
 }
 
 .tm-main {
