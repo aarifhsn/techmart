@@ -378,3 +378,15 @@
   border-radius: var(--tm-radius-sm);
   text-align: center;
 }
+
+.tm-page {
+  padding-block: var(--tm-space-8) var(--tm-space-16);
+}
+
+.tm-page__title {
+  margin-bottom: var(--tm-space-6);
+}
+.woocommerce-customer-details .addresses {
+  display: flex;
+  gap: 6rem;
+}

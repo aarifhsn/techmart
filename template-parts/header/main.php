@@ -27,12 +27,18 @@ $account_url = function_exists('wc_get_page_permalink') ? wc_get_page_permalink(
 	<?php get_template_part('template-parts/header/search-form'); ?>
 
 	<div class="tm-header__utility">
-		<a href="<?php echo esc_url(techmart_get_wishlist_url()); ?>"
-			class="tm-header__utility-link tm-wishlist-toggle">
-			<?php techmart_icon('heart'); ?>
-			<span class="tm-header__utility-label"><?php esc_html_e('Wishlist', 'techmart'); ?></span>
-			<span class="tm-badge-count tm-wishlist-count"><?php echo esc_html(techmart_get_wishlist_count()); ?></span>
-		</a>
+		<div class="tm-header__wishlist-wrapper">
+			<a href="<?php echo esc_url(techmart_get_wishlist_url()); ?>"
+				class="tm-header__utility-link tm-header__wishlist-toggle" aria-haspopup="true" aria-expanded="false"
+				aria-controls="tm-mini-wishlist">
+				<?php techmart_icon('heart'); ?>
+				<span class="tm-header__utility-label"><?php esc_html_e('Wishlist', 'techmart'); ?></span>
+				<span
+					class="tm-badge-count tm-wishlist-count"><?php echo esc_html(techmart_get_wishlist_count()); ?></span>
+			</a>
+
+			<?php get_template_part('template-parts/header/mini-wishlist'); ?>
+		</div>
 
 		<div class="tm-header__cart-wrapper">
 			<a href="<?php echo esc_url($cart_url); ?>" class="tm-header__utility-link tm-header__cart-toggle"

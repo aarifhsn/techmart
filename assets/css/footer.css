@@ -16,6 +16,7 @@
 /* ---------- Main columns ---------- */
 .tm-footer__main {
   padding-block: var(--tm-space-12);
+  border-bottom: 1px solid var(--tm-color-border-dark);
 }
 
 .tm-footer__grid {
@@ -50,16 +51,19 @@
   gap: var(--tm-space-3);
 }
 
+.tm-footer__social li {
+  border: 1px solid var(--tm-color-border-dark);
+}
+
 .tm-footer__social a {
   display: grid;
   place-items: center;
   width: 36px;
   height: 36px;
-  border-radius: var(--tm-radius-pill);
+
   background: rgba(255, 255, 255, 0.08);
   color: var(--tm-color-dark);
   transition: background var(--tm-transition-fast);
-  border: 1px solid rgba(255, 255, 255, 0.3);
 }
 
 .tm-footer__social a:hover,
