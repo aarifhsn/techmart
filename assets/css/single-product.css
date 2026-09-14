@@ -13,6 +13,12 @@
   padding-block: var(--tm-space-8) var(--tm-space-16);
 }
 
+.single-product section.related ul.products {
+  display: flex;
+  flex-flow: nowrap row;
+  gap: var(--tm-space-6);
+}
+
 /*
  * .product is WooCommerce's own wrapper class (from wc_product_class()
  * in the un-overridden content-single-product.php) around the gallery
@@ -20,7 +26,7 @@
  * the entire gallery+summary layout, with zero markup changes.
  */
 .product {
-  /* display: grid; */
+  display: grid;
   grid-template-columns: 1fr 1fr;
   gap: var(--tm-space-10);
   margin-bottom: var(--tm-space-10);

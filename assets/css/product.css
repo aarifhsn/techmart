@@ -16,15 +16,16 @@
  */
 .tm-product-grid,
 .products {
+  margin-top: var(--tm-space-8);
   display: grid;
   grid-template-columns: repeat(5, 1fr);
   gap: var(--tm-space-6);
-  margin-top: var(--tm-space-8);
 }
 
 ul.columns-4 {
   display: flex;
   gap: var(--tm-space-6);
+  flex-flow: wrap;
 }
 
 /* ---------- Card container ---------- */
@@ -38,6 +39,8 @@ ul.columns-4 {
   transition:
     box-shadow var(--tm-transition-base),
     border-color var(--tm-transition-base);
+  min-width: 230px; /* matches the 400x400 techmart-product-card image size */
+  max-width: 270px;
 }
 
 .tm-product-card:hover {
