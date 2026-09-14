@@ -390,3 +390,9 @@
   display: flex;
   gap: 6rem;
 }
+
+.wp-singular ul.products {
+  display: flex;
+  flex-flow: wrap row;
+  gap: var(--tm-space-6);
+}
