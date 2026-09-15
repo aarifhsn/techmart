@@ -40,31 +40,33 @@ $has_countdown = $soonest_expiry > time();
 	<div class="tm-container">
 		<div class="tm-section-header tm-weekly-deals__header">
 			<h2 class="tm-section-header__title"><?php esc_html_e('Weekly Deals', 'techmart'); ?></h2>
+			<div class="tm-section-header__right">
+				<?php if ($has_countdown): ?>
+					<div class="tm-countdown" data-expires="<?php echo esc_attr($soonest_expiry); ?>">
+						<span class="tm-countdown__label">
+							<?php esc_html_e('Ends in', 'techmart'); ?>
+						</span>
+						<span class="tm-countdown__unit"><span data-unit="days">00</span><small>
+								<?php esc_html_e('Days', 'techmart'); ?>
+							</small></span>
+						<span class="tm-countdown__unit"><span data-unit="hours">00</span><small>
+								<?php esc_html_e('Hours', 'techmart'); ?>
+							</small></span>
+						<span class="tm-countdown__unit"><span data-unit="minutes">00</span><small>
+								<?php esc_html_e('Mins', 'techmart'); ?>
+							</small></span>
+						<span class="tm-countdown__unit"><span data-unit="seconds">00</span><small>
+								<?php esc_html_e('Secs', 'techmart'); ?>
+							</small></span>
+					</div>
+				<?php endif; ?>
 
-			<?php if ($has_countdown): ?>
-				<div class="tm-countdown" data-expires="<?php echo esc_attr($soonest_expiry); ?>">
-					<span class="tm-countdown__label">
-						<?php esc_html_e('Ends in', 'techmart'); ?>
-					</span>
-					<span class="tm-countdown__unit"><span data-unit="days">00</span><small>
-							<?php esc_html_e('d', 'techmart'); ?>
-						</small></span>
-					<span class="tm-countdown__unit"><span data-unit="hours">00</span><small>
-							<?php esc_html_e('h', 'techmart'); ?>
-						</small></span>
-					<span class="tm-countdown__unit"><span data-unit="minutes">00</span><small>
-							<?php esc_html_e('m', 'techmart'); ?>
-						</small></span>
-					<span class="tm-countdown__unit"><span data-unit="seconds">00</span><small>
-							<?php esc_html_e('s', 'techmart'); ?>
-						</small></span>
-				</div>
-			<?php endif; ?>
-
-			<a href="<?php echo esc_url(wc_get_page_permalink('shop')); ?>" class="tm-section-header__link">
-				<?php esc_html_e('View All Deals', 'techmart'); ?>
-				<?php techmart_icon('arrow-right'); ?>
-			</a>
+				<a href="<?php echo esc_url(add_query_arg('on_sale', '1', wc_get_page_permalink('shop'))); ?>"
+					class="tm-section-header__link">
+					<?php esc_html_e('View All Deals', 'techmart'); ?>
+					<?php techmart_icon('arrow-right'); ?>
+				</a>
+			</div>
 		</div>
 
 		<div class="tm-product-grid">

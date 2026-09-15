@@ -47,6 +47,67 @@ function techmart_filter_search_by_category( $query ) {
 add_action( 'pre_get_posts', 'techmart_filter_search_by_category' );
 
 /**
+ * Allow the shop archive to show the same scheduled deals as the homepage.
+ *
+ * A template part is not a WordPress route by itself. The Weekly Deals link
+ * therefore points at the shop archive with this query var, which is handled
+ * here on the main WooCommerce product query.
+ *
+ * @param string[] $vars Public query variables.
+ * @return string[]
+ */
+function techmart_register_product_collection_query_var( $vars ) {
+	$vars[] = 'techmart_collection';
+
+	return $vars;
+}
+add_filter( 'query_vars', 'techmart_register_product_collection_query_var' );
+
+/**
+ * Filter the shop archive for a TechMart product collection.
+ *
+ * This deliberately matches techmart_get_weekly_deal_products(): a deal must
+ * be currently on sale and have a future scheduled sale-end timestamp.
+ *
+ * @param WP_Query $query Main WordPress query.
+ */
+function techmart_filter_shop_for_product_collection( $query ) {
+	$collection = $query->get( 'techmart_collection' );
+
+	if ( is_admin() || ! $query->is_main_query() || ! in_array( $collection, array( 'trending', 'weekly-deals' ), true ) ) {
+		return;
+	}
+
+	if ( ! $query->is_post_type_archive( 'product' ) ) {
+		return;
+	}
+
+	if ( 'trending' === $collection ) {
+		$featured_ids = array_filter( array_map( 'absint', wc_get_featured_product_ids() ) );
+		$query->set( 'post__in', ! empty( $featured_ids ) ? $featured_ids : array( 0 ) );
+
+		return;
+	}
+
+	$on_sale_ids = array_filter( array_map( 'absint', wc_get_product_ids_on_sale() ) );
+	$query->set( 'post__in', ! empty( $on_sale_ids ) ? $on_sale_ids : array( 0 ) );
+
+	$meta_query   = (array) $query->get( 'meta_query' );
+	$meta_query[] = array(
+		'key'     => '_sale_price_dates_to',
+		'value'   => time(),
+		'compare' => '>',
+		'type'    => 'NUMERIC',
+	);
+
+	$query->set( 'meta_query', $meta_query ); // phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_meta_query -- required scheduled-sale filter.
+	$query->set( 'meta_key', '_sale_price_dates_to' ); // phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_meta_key -- sorts deals by their genuine expiry.
+	$query->set( 'orderby', 'meta_value_num' );
+	$query->set( 'order', 'ASC' );
+}
+add_action( 'pre_get_posts', 'techmart_filter_shop_for_product_collection', 20 );
+
+/**
  * Keep the header cart UI correct under full-page caching.
  *
  * WooCommerce enqueues its own cart-fragments script automatically (no

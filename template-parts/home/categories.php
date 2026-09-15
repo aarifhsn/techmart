@@ -11,45 +11,45 @@
  * @package TechMart
  */
 
-if ( ! defined( 'ABSPATH' ) ) {
+if (!defined('ABSPATH')) {
 	exit;
 }
 
 $categories = get_terms(
 	array(
-		'taxonomy'   => 'product_cat',
+		'taxonomy' => 'product_cat',
 		'hide_empty' => true,
-		'parent'     => 0,
-		'number'     => 8,
+		'parent' => 0,
+		'number' => 8,
 	)
 );
 
-if ( is_wp_error( $categories ) || empty( $categories ) ) {
+if (is_wp_error($categories) || empty($categories)) {
 	return;
 }
 ?>
-<section class="tm-categories tm-band" aria-label="<?php esc_attr_e( 'Shop by category', 'techmart' ); ?>">
+<section class="tm-categories tm-band" aria-label="<?php esc_attr_e('Shop by category', 'techmart'); ?>">
 	<div class="tm-container">
 		<?php
 		techmart_get_template_part(
 			'template-parts/components/section-header',
 			null,
 			array(
-				'title'     => __( 'Shop by Category', 'techmart' ),
-				'link_url'  => get_post_type_archive_link( 'product' ),
-				'link_text' => __( 'View All Categories', 'techmart' ),
+				'title' => __('Shop by Category', 'techmart'),
+				'link_url' => get_permalink(get_page_by_path('products-categories')),
+				'link_text' => __('View All Categories', 'techmart'),
 			)
 		);
 		?>
 
 		<ul class="tm-categories__grid">
-			<?php foreach ( $categories as $category ) : ?>
+			<?php foreach ($categories as $category): ?>
 				<li>
 					<?php
 					techmart_get_template_part(
 						'template-parts/components/category-item',
 						null,
-						array( 'category' => $category )
+						array('category' => $category)
 					);
 					?>
 				</li>

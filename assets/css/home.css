@@ -206,20 +206,26 @@
 
 .tm-countdown__unit {
   display: flex;
-  align-items: baseline;
+  flex-direction: column; /* was row/baseline */
+  align-items: center;
+  justify-content: center;
   gap: 2px;
+  min-width: 48px;
   padding: var(--tm-space-1) var(--tm-space-2);
-  background: var(--tm-color-dark);
-  color: var(--tm-color-white);
+  background: var(--tm-color-white); /* was --tm-color-dark */
+  color: var(--tm-color-dark); /* was --tm-color-white */
+  border: 1px solid var(--tm-color-border);
   border-radius: var(--tm-radius-sm);
   font-weight: var(--tm-fw-bold);
   font-variant-numeric: tabular-nums;
+  font-size: var(--tm-fs-body);
 }
 
 .tm-countdown__unit small {
-  font-size: var(--tm-fs-small);
+  font-size: var(--tm-fs-xs);
   font-weight: var(--tm-fw-regular);
-  opacity: 0.7;
+  color: var(--tm-color-body); /* replaces opacity: 0.7 on white text */
+  opacity: 1;
 }
 
 /* ---------- Promo banner ---------- */

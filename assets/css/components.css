@@ -83,12 +83,19 @@
   height: 16px;
 }
 
+.tm-section-header__right {
+  display: flex;
+  align-items: center;
+  gap: var(--tm-space-4);
+  flex-wrap: wrap;
+}
+
 /* ---------- Button ---------- */
 .tm-button {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  padding: var(--tm-space-3) var(--tm-space-6);
+  padding: var(--tm-space-2) var(--tm-space-6);
   border-radius: var(--tm-radius-sm);
   font-weight: var(--tm-fw-semibold);
   transition:

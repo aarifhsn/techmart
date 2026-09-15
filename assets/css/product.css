@@ -184,6 +184,7 @@ ul.columns-4 {
 .tm-product-card__add-to-cart {
   width: 100%;
   margin-top: var(--tm-space-2);
+  max-width: 150px;
 }
 
 /* WooCommerce's own AJAX add-to-cart JS toggles these two classes;
