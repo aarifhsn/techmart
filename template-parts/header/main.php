@@ -76,7 +76,6 @@ $account_url = function_exists('wc_get_page_permalink') ? wc_get_page_permalink(
 
 				<?php else: ?>
 
-					<span><?php esc_html_e('Hello,', 'techmart'); ?></span><br>
 					<strong><?php esc_html_e('Sign In', 'techmart'); ?></strong>
 
 				<?php endif; ?>

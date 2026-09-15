@@ -43,6 +43,7 @@ require TECHMART_DIR . '/inc/template-hooks.php';
  * Phase 5 modules.
  */
 require TECHMART_DIR . '/inc/newsletter.php';
+require TECHMART_DIR . '/inc/mailchimp.php';
 
 /**
  * Phase 10 modules.

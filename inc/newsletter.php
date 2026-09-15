@@ -46,7 +46,20 @@ function techmart_handle_newsletter_signup() {
 		exit;
 	}
 
-	$status = has_action( 'techmart_newsletter_signup' ) ? 'success' : 'unconfigured';
+	/**
+	 * Providers can return true on success, a WP_Error when their API rejects
+	 * the request, or null when they are not configured. The existing action is
+	 * still fired below for backwards-compatible third-party integrations.
+	 */
+	$result = apply_filters( 'techmart_newsletter_signup_result', null, $email );
+
+	if ( is_wp_error( $result ) ) {
+		$status = 'error';
+	} elseif ( true === $result || has_action( 'techmart_newsletter_signup' ) ) {
+		$status = 'success';
+	} else {
+		$status = 'unconfigured';
+	}
 
 	do_action( 'techmart_newsletter_signup', $email );
 

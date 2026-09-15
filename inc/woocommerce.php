@@ -78,7 +78,11 @@ function techmart_filter_shop_for_product_collection( $query ) {
 		return;
 	}
 
-	if ( ! $query->is_post_type_archive( 'product' ) ) {
+	$is_shop_query = $query->is_post_type_archive( 'product' )
+		|| 'product' === $query->get( 'post_type' )
+		|| (int) $query->get( 'page_id' ) === wc_get_page_id( 'shop' );
+
+	if ( ! $is_shop_query ) {
 		return;
 	}
 

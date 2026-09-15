@@ -313,8 +313,8 @@
   width: 90px;
   height: 90px;
   border-radius: 50%;
-  background: var(--tm-color-accent);
-  color: var(--tm-color-dark);
+  background: var(--tm-color-primary);
+  color: var(--tm-color-light);
   font-weight: var(--tm-fw-bold);
   text-align: center;
   font-size: var(--tm-fs-small);

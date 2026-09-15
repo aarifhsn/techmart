@@ -12,11 +12,17 @@
   width: 20px;
   height: 20px;
   flex: 0 0 auto;
+  margin-right: var(--tm-space-2);
 }
 
 .tm-icon svg {
   width: 100%;
   height: 100%;
+}
+
+img {
+  height: auto;
+  max-width: 100%;
 }
 
 /*
@@ -402,4 +408,220 @@
   display: flex;
   flex-flow: wrap row;
   gap: var(--tm-space-6);
+}
+/* ---------- Order tracking ---------- */
+
+.techmart-order-tracking {
+  max-width: 900px;
+  margin-inline: auto;
+  padding: var(--tm-space-8) 0 var(--tm-space-16);
+}
+
+.techmart-order-tracking .woocommerce {
+  width: 100%;
+}
+
+/* Tracking form */
+.techmart-order-tracking .woocommerce-form-track-order {
+  margin: 0;
+  padding: var(--tm-space-8);
+  background: var(--tm-color-white);
+  border: 1px solid var(--tm-color-border);
+  border-radius: var(--tm-radius-md);
+  box-shadow: var(--tm-shadow-sm);
+}
+
+.techmart-order-tracking .woocommerce-form-track-order input.input-text {
+  width: 100%;
+  min-height: 48px;
+  box-sizing: border-box;
+  padding: var(--tm-space-3);
+  border: 1px solid var(--tm-color-border);
+  border-radius: var(--tm-radius-sm);
+}
+
+.techmart-order-tracking .woocommerce-form-track-order button {
+  min-height: 48px;
+  padding: var(--tm-space-3) var(--tm-space-6);
+  border: 0;
+  border-radius: var(--tm-radius-sm);
+  background: var(--tm-color-primary);
+  color: var(--tm-color-white);
+  font-weight: var(--tm-fw-semibold);
+  cursor: pointer;
+}
+
+/* Submitted order summary */
+.techmart-order-tracking .order-info {
+  margin: 0 0 var(--tm-space-8);
+  padding: var(--tm-space-5) var(--tm-space-6);
+  border-left: 3px solid var(--tm-color-success);
+  border-radius: var(--tm-radius-sm);
+  background: var(--tm-color-surface);
+  color: var(--tm-color-dark);
+  line-height: 1.7;
+}
+
+.techmart-order-tracking .order-info mark {
+  padding: 0;
+  background: transparent;
+  color: var(--tm-color-primary);
+  font-weight: var(--tm-fw-semibold);
+}
+
+/* Shared result cards */
+.techmart-order-tracking .woocommerce-order-details,
+.techmart-order-tracking .woocommerce-customer-details {
+  margin-top: var(--tm-space-8);
+  padding: var(--tm-space-6);
+  border: 1px solid var(--tm-color-border);
+  border-radius: var(--tm-radius-md);
+  background: var(--tm-color-white);
+  box-shadow: var(--tm-shadow-sm);
+}
+
+.techmart-order-tracking h2 {
+  margin: 0 0 var(--tm-space-5);
+  font-size: var(--tm-fs-h3);
+  color: var(--tm-color-dark);
+}
+
+/* Order table */
+.techmart-order-tracking .woocommerce-table {
+  width: 100%;
+  margin: 0;
+  border-collapse: collapse;
+}
+
+.techmart-order-tracking .woocommerce-table th,
+.techmart-order-tracking .woocommerce-table td {
+  padding: var(--tm-space-4);
+  border-bottom: 1px solid var(--tm-color-border);
+  text-align: left;
+  vertical-align: top;
+}
+
+.techmart-order-tracking .woocommerce-table thead th {
+  background: var(--tm-color-surface);
+  color: var(--tm-color-dark);
+  font-weight: var(--tm-fw-semibold);
+}
+
+.techmart-order-tracking .woocommerce-table .product-total,
+.techmart-order-tracking .woocommerce-table th:last-child {
+  text-align: right;
+}
+
+.techmart-order-tracking .woocommerce-table tfoot th,
+.techmart-order-tracking .woocommerce-table tfoot td {
+  border-bottom: 0;
+}
+
+.techmart-order-tracking .woocommerce-table tfoot th {
+  color: var(--tm-color-body);
+  font-weight: var(--tm-fw-regular);
+}
+
+.techmart-order-tracking .woocommerce-table tfoot tr:last-child th,
+.techmart-order-tracking .woocommerce-table tfoot tr:last-child td {
+  padding-top: var(--tm-space-5);
+  color: var(--tm-color-dark);
+  font-size: 1.05rem;
+  font-weight: var(--tm-fw-bold);
+}
+
+/* Customer addresses */
+.techmart-order-tracking .woocommerce-customer-details .addresses {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--tm-space-5);
+  margin: 0;
+}
+
+.techmart-order-tracking .woocommerce-column {
+  padding: var(--tm-space-5);
+  border-radius: var(--tm-radius-sm);
+  background: var(--tm-color-surface);
+}
+
+.techmart-order-tracking .woocommerce-column__title {
+  margin-bottom: var(--tm-space-3);
+  font-size: var(--tm-fs-body);
+}
+
+.techmart-order-tracking address {
+  margin: 0;
+  color: var(--tm-color-body);
+  font-style: normal;
+  line-height: 1.7;
+}
+
+.techmart-order-tracking .woocommerce-customer-details p {
+  margin: var(--tm-space-2) 0 0;
+}
+
+/* Help section */
+.techmart-order-help {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--tm-space-5);
+  margin-top: var(--tm-space-8);
+}
+
+.techmart-order-help__item {
+  padding: var(--tm-space-6);
+  border: 1px solid var(--tm-color-border);
+  border-top: 3px solid var(--tm-color-primary);
+  border-radius: var(--tm-radius-md);
+  background: var(--tm-color-surface);
+}
+
+.techmart-order-help h2 {
+  margin-bottom: var(--tm-space-3);
+  font-size: var(--tm-fs-body);
+}
+
+.techmart-order-help p {
+  margin: 0;
+  color: var(--tm-color-body);
+  line-height: 1.7;
+}
+
+@media (max-width: 700px) {
+  .techmart-order-tracking {
+    padding-inline: var(--tm-space-4);
+  }
+
+  .techmart-order-tracking .woocommerce-form-track-order,
+  .techmart-order-tracking .woocommerce-order-details,
+  .techmart-order-tracking .woocommerce-customer-details {
+    padding: var(--tm-space-5);
+  }
+
+  .techmart-order-tracking .woocommerce-customer-details .addresses,
+  .techmart-order-help {
+    grid-template-columns: 1fr;
+  }
+
+  .techmart-order-tracking .woocommerce-table {
+    font-size: var(--tm-fs-small);
+  }
+
+  .techmart-order-tracking .woocommerce-table th,
+  .techmart-order-tracking .woocommerce-table td {
+    padding: var(--tm-space-3) var(--tm-space-2);
+  }
+}
+
+button.woocommerce-Button,
+button.woocommerce-button {
+  min-height: 48px;
+  padding: var(--tm-space-3) var(--tm-space-6);
+  border: 0;
+  border-radius: var(--tm-radius-sm);
+  background: var(--tm-color-primary);
+  color: var(--tm-color-white);
+  font-weight: var(--tm-fw-semibold);
+  cursor: pointer;
+  margin-top: var(--tm-space-4);
 }

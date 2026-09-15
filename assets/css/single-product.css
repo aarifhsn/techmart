@@ -95,11 +95,86 @@
 }
 
 /* ---------- Add to cart + wishlist ---------- */
-.cart {
+/* Sale badge — pulled out of grid flow entirely so it can't disrupt
+   .product's 2-column layout; positioned as a corner ribbon over the
+   gallery instead, matching the badge style used on product cards. */
+.product {
+	position: relative;
+}
+
+.onsale {
+	position: absolute;
+	top: var(--tm-space-3);
+	left: var(--tm-space-3);
+	z-index: 2;
+	display: inline-block;
+	padding: 4px var(--tm-space-3);
+	border-radius: var(--tm-radius-sm);
+	background: var(--tm-color-sale);
+	color: var(--tm-color-dark);
+	font-size: var(--tm-fs-small);
+	font-weight: var(--tm-fw-bold);
+}
+
+/* Grouped products (e.g. "Logo Collection") ---------- */
+
+/* The flex layout was only ever meant for the simple-product
+   quantity+button row — excluding .grouped_form here stops it from
+   also flexing the grouped product's <table>. */
+.cart:not(.grouped_form) {
+	display: flex;
+	align-items: center;
+	flex-wrap: wrap;
+	gap: var(--tm-space-4);
+}
+
+.woocommerce-grouped-product-list.group_table {
+	width: 100%;
+	border-collapse: collapse;
+	margin-bottom: var(--tm-space-5);
+}
+.woocommerce-grouped-product-list-item {
+  border-bottom: 1px solid var(--tm-color-border);
   display: flex;
   align-items: center;
-  flex-wrap: wrap;
   gap: var(--tm-space-4);
+}
+
+.woocommerce-grouped-product-list-item td {
+	padding-block: var(--tm-space-3);
+	vertical-align: middle;
+}
+
+.woocommerce-grouped-product-list-item__quantity {
+	width: 90px;
+}
+
+.woocommerce-grouped-product-list-item__quantity .quantity .qty {
+	width: 70px;
+}
+
+.woocommerce-grouped-product-list-item__label {
+	padding-inline: var(--tm-space-4);
+}
+
+.woocommerce-grouped-product-list-item__label a {
+	font-weight: var(--tm-fw-semibold);
+	color: var(--tm-color-dark);
+}
+
+.woocommerce-grouped-product-list-item__label a:hover,
+.woocommerce-grouped-product-list-item__label a:focus-visible {
+	color: var(--tm-color-primary);
+}
+
+.woocommerce-grouped-product-list-item__price {
+	text-align: right;
+	white-space: nowrap;
+	font-weight: var(--tm-fw-bold);
+}
+
+.grouped_form .single_add_to_cart_button {
+	width: 100%;
 }
 
 /* WooCommerce's own class on the add-to-cart submit button — styled
@@ -117,6 +192,14 @@
 .single_add_to_cart_button:hover,
 .single_add_to_cart_button:focus-visible {
   background: var(--tm-color-primary-hover);
+}
+
+/* .tm-single-product .product {
+  display: block; /* undo the grid layout for the sticky bar, which is a child of .product */
+} */
+
+.tm-single-product .product .related {
+  display: block; /* undo the grid layout for the sticky bar, which is a child of .product */
 }
 
 .tm-single-product__wishlist {
@@ -224,3 +307,5 @@
 .tm-sticky-bar__price {
   font-size: var(--tm-fs-small);
 }
+
+/* EXTRA  */

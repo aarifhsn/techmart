@@ -75,6 +75,10 @@ function techmart_enqueue_assets()
 		wp_enqueue_style('techmart-cart-checkout-account', TECHMART_URI . '/assets/css/cart-checkout-account.css', array('techmart-base', 'techmart-components'), TECHMART_VERSION);
 	}
 
+	if (is_page_template('template-info-page.php')) {
+		wp_enqueue_style('techmart-info-page', TECHMART_URI . '/assets/css/info-page.css', array('techmart-base'), TECHMART_VERSION);
+	}
+
 	/**
 	 * Breakpoint overrides load last so they can win the cascade at their
 	 * breakpoints. The dependency list is built up from whichever
@@ -85,7 +89,7 @@ function techmart_enqueue_assets()
 	 */
 	$responsive_deps = array('techmart-components', 'techmart-header', 'techmart-footer');
 
-	foreach (array('techmart-home', 'techmart-product', 'techmart-shop', 'techmart-single-product', 'techmart-cart-checkout-account') as $conditional_style) {
+	foreach (array('techmart-home', 'techmart-product', 'techmart-shop', 'techmart-single-product', 'techmart-cart-checkout-account', 'techmart-info-page') as $conditional_style) {
 		if (wp_style_is($conditional_style, 'enqueued')) {
 			$responsive_deps[] = $conditional_style;
 		}
@@ -218,3 +222,33 @@ function techmart_preload_fonts()
 	);
 }
 add_action('wp_head', 'techmart_preload_fonts', 1);
+
+
+add_filter('the_content', 'techmart_order_tracking_content');
+
+function techmart_order_tracking_content($content)
+{
+	if (
+		is_admin() ||
+		!is_page() ||
+		!has_shortcode($content, 'woocommerce_order_tracking')
+	) {
+		return $content;
+	}
+
+	$help = '
+        <section class="techmart-order-help" aria-label="Order tracking help">
+            <div class="techmart-order-help__item">
+                <h2>Where can I find my order number?</h2>
+                <p>Your order number can be found in your order confirmation email and in your TechMart account.</p>
+            </div>
+
+            <div class="techmart-order-help__item">
+                <h2>Didn\'t receive your confirmation email?</h2>
+                <p>Check your spam or junk folder. If you still can\'t find it, contact our support team.</p>
+            </div>
+        </section>
+    ';
+
+	return '<div class="techmart-order-tracking">' . $content . $help . '</div>';
+}

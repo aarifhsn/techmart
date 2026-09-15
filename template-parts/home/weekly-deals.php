@@ -61,7 +61,7 @@ $has_countdown = $soonest_expiry > time();
 					</div>
 				<?php endif; ?>
 
-				<a href="<?php echo esc_url(add_query_arg('on_sale', '1', wc_get_page_permalink('shop'))); ?>"
+				<a href="<?php echo esc_url( add_query_arg( 'techmart_collection', 'weekly-deals', wc_get_page_permalink( 'shop' ) ) ); ?>"
 					class="tm-section-header__link">
 					<?php esc_html_e('View All Deals', 'techmart'); ?>
 					<?php techmart_icon('arrow-right'); ?>

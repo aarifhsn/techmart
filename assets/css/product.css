@@ -22,11 +22,11 @@
   gap: var(--tm-space-6);
 }
 
-ul.columns-4 {
+/* ul.columns-4 {
   display: flex;
   gap: var(--tm-space-6);
   flex-flow: wrap;
-}
+} */
 
 /* ---------- Card container ---------- */
 .tm-product-card {
