@@ -15,7 +15,7 @@
  * sections' grid with zero extra template files.
  */
 .tm-product-grid,
-.products {
+ul.products {
   margin-top: var(--tm-space-8);
   display: grid;
   grid-template-columns: repeat(5, 1fr);

@@ -39,8 +39,28 @@
    data-attribute/markup coupling ourselves risks silently breaking
    the zoom or lightbox behavior. This restyles only its stable public
    classes. */
+
+
+.woocommerce-product-gallery {
+    position: relative;
+   }
 .woocommerce-product-gallery__image img {
   border-radius: var(--tm-radius-md);
+}
+
+.woocommerce-product-gallery__trigger {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    z-index: 999;
+    border: 1px solid var(--tm-color-primary);
+    padding: 8px 10px;
+    border-radius: 50%;
+}
+
+.woocommerce-product-attributes-item {
+  display: flex;
+  gap: var(--tm-space-4);
 }
 
 .flex-control-thumbs {
@@ -73,7 +93,7 @@
 }
 
 .summary .price {
-  font-size: var(--tm-fs-h1);
+  font-size: var(--tm-fs-h3);
   font-weight: var(--tm-fw-bold);
   color: var(--tm-color-dark);
 }
@@ -138,6 +158,7 @@
   display: flex;
   align-items: center;
   gap: var(--tm-space-4);
+  margin-bottom: 0;
 }
 
 .woocommerce-grouped-product-list-item td {
@@ -211,11 +232,17 @@
   color: var(--tm-color-sale);
 }
 
-/* ---------- Meta (SKU / categories / tags) ---------- */
-.product_meta {
-  font-size: var(--tm-fs-small);
-  color: var(--tm-color-body);
+.tm-single-product__trust-strip {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--tm-space-5);
+  padding: var(--tm-space-4) 0;
+  margin-bottom: var(--tm-space-2);
+  border-top: 1px solid var(--tm-color-border);
+  border-bottom: 1px solid var(--tm-color-border);
 }
+
+/* ---------- Meta (SKU / categories / tags) ---------- */
 
 .product_meta > span {
   display: block;
@@ -224,6 +251,25 @@
 
 .product_meta a {
   color: var(--tm-color-primary);
+}
+
+.product_meta {
+  padding: var(--tm-space-4);
+  background: var(--tm-color-surface);
+  border-radius: var(--tm-radius-md);
+  font-size: var(--tm-fs-small);
+  color: var(--tm-color-body);
+}
+
+.product_meta .posted_in a {
+  display: inline-block;
+  padding: 2px var(--tm-space-2);
+  margin-left: 4px;
+  border-radius: var(--tm-radius-pill);
+  background: var(--tm-color-white);
+  border: 1px solid var(--tm-color-border);
+  font-weight: var(--tm-fw-semibold);
+  color: var(--tm-color-dark);
 }
 
 /* ---------- Tabs ---------- */
@@ -309,3 +355,213 @@
 }
 
 /* EXTRA  */
+/* ---------- Reviews ---------- */
+.woocommerce-Reviews-title {
+  margin-bottom: var(--tm-space-4);
+}
+
+.woocommerce-noreviews {
+  color: var(--tm-color-body);
+}
+
+#review_form_wrapper {
+  margin-top: var(--tm-space-8);
+}
+
+.comment-form-rating {
+  margin-bottom: var(--tm-space-5);
+}
+
+.comment-form-rating > label {
+  display: block;
+  margin-bottom: var(--tm-space-2);
+  font-weight: var(--tm-fw-semibold);
+}
+
+.tm-single-product__discount-badge {
+  display: inline-block;
+  font-size: var(--tm-fs-small);
+  font-weight: var(--tm-fw-bold);
+  vertical-align: middle;
+}
+
+.comment-form-rating .stars span {
+  display: inline-flex;
+  gap: 2px;
+}
+
+/* WooCommerce's link text is "1 of 5 stars" etc. — hidden via font-size:0
+   and replaced with an actual star glyph, matching the disabled default
+   stylesheet's original approach but with our own tokens. */
+.comment-form-rating .stars a {
+  position: relative;
+  display: inline-block;
+  width: 22px;
+  height: 22px;
+  font-size: 0;
+  color: var(--tm-color-border);
+  text-decoration: none;
+}
+
+.comment-form-rating .stars a::before {
+  content: "\2605";
+  position: absolute;
+  inset: 0;
+  font-size: 20px;
+  line-height: 22px;
+  text-align: center;
+  color: var(--tm-color-border); /* default: every star unfilled */
+}
+
+/* Hover — pure CSS, no JS needed: hovering anywhere in .stars fills
+   every star, then this dims only the ones AFTER whichever star is
+   actually being hovered (the general sibling combinator only selects
+   later siblings, which is exactly the tail-end we want to undo). */
+.comment-form-rating .stars:hover a::before {
+  color: var(--tm-color-primary);
+}
+
+.comment-form-rating .stars a:hover ~ a::before {
+  color: var(--tm-color-border);
+}
+
+/* Click — same trick, but keyed to WooCommerce's own JS-added classes
+   so the picked rating stays filled after the mouse moves away:
+   .selected on the <p class="stars"> wrapper, .active on the clicked
+   star. Fill everything in a "selected" state, then dim only what's
+   after .active. */
+.comment-form-rating .stars.selected a::before {
+  color: var(--tm-color-primary);
+}
+
+.comment-form-rating .stars.selected a.active ~ a::before {
+  color: var(--tm-color-border);
+}
+
+/* .hover / .active are added by WooCommerce's own star-rating JS — not
+   ours to add, just to style. */
+.comment-form-rating .stars a.hover,
+.comment-form-rating .stars a.active {
+  color: var(--tm-color-primary);
+}
+
+.comment-form-rating .stars select {
+  display: none;
+}
+
+#commentform p > label {
+  display: block;
+  margin-bottom: var(--tm-space-2);
+  font-weight: var(--tm-fw-semibold);
+}
+
+#commentform textarea#comment {
+  width: 100%;
+  max-width: 100%;
+  padding: var(--tm-space-3);
+  border: 1px solid var(--tm-color-border);
+  border-radius: var(--tm-radius-sm);
+  font-family: inherit;
+}
+
+#commentform .form-submit {
+  margin-top: var(--tm-space-4);
+}
+
+#commentform #submit {
+  padding: var(--tm-space-3) var(--tm-space-6);
+  border: 0;
+  border-radius: var(--tm-radius-sm);
+  background: var(--tm-color-primary);
+  color: var(--tm-color-white);
+  font-weight: var(--tm-fw-semibold);
+  cursor: pointer;
+}
+
+#commentform #submit:hover,
+#commentform #submit:focus-visible {
+  background: var(--tm-color-primary-hover);
+}
+
+/* Actual submitted reviews — currently untestable with 0 reviews, but
+   styled ahead of time so the first real one doesn't render bare. */
+.commentlist {
+  list-style: none;
+  margin: 0 0 var(--tm-space-8);
+  padding: 0;
+}
+
+.commentlist .comment_container {
+  display: flex;
+  gap: var(--tm-space-4);
+  padding-block: var(--tm-space-5);
+  border-bottom: 1px solid var(--tm-color-border);
+}
+
+.commentlist .avatar {
+  width: 48px;
+  height: 48px;
+  border-radius: var(--tm-radius-pill);
+  flex: 0 0 auto;
+}
+
+.commentlist .meta {
+  margin: var(--tm-space-1) 0 var(--tm-space-2);
+  font-size: var(--tm-fs-small);
+  color: var(--tm-color-body);
+}
+
+.commentlist .description p:last-child {
+  margin-bottom: 0;
+}
+
+.stock {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--tm-space-2);
+  font-size: var(--tm-fs-small);
+  font-weight: var(--tm-fw-semibold);
+}
+
+.stock::before {
+  content: "";
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: currentColor;
+}
+
+.stock.in-stock { color: var(--tm-color-success); }
+.stock.out-of-stock { color: var(--tm-color-sale); }
+.stock.available-on-backorder { color: var(--tm-color-accent); }
+
+.tm-quantity--stepper {
+  display: inline-flex;
+  border: 1px solid var(--tm-color-border);
+  border-radius: var(--tm-radius-sm);
+  overflow: hidden;
+}
+
+.tm-quantity--stepper .qty {
+  width: 48px;
+  border: 0;
+  border-left: 1px solid var(--tm-color-border);
+  border-right: 1px solid var(--tm-color-border);
+  border-radius: 0;
+  text-align: center;
+}
+
+.tm-qty-btn {
+  width: 36px;
+  border: 0;
+  background: var(--tm-color-surface);
+  color: var(--tm-color-dark);
+  font-weight: var(--tm-fw-bold);
+  cursor: pointer;
+}
+
+.tm-qty-btn:hover,
+.tm-qty-btn:focus-visible {
+  background: var(--tm-color-border);
+}
+

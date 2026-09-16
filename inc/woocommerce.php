@@ -10,7 +10,7 @@
  * @package TechMart
  */
 
-if ( ! defined( 'ABSPATH' ) ) {
+if (!defined('ABSPATH')) {
 	exit;
 }
 
@@ -23,28 +23,29 @@ if ( ! defined( 'ABSPATH' ) ) {
  *
  * @param WP_Query $query The main query, passed by reference via the hook.
  */
-function techmart_filter_search_by_category( $query ) {
-	if ( is_admin() || ! $query->is_main_query() ) {
+function techmart_filter_search_by_category($query)
+{
+	if (is_admin() || !$query->is_main_query()) {
 		return;
 	}
 
-	if ( ! $query->is_search() || empty( $_GET['product_cat'] ) ) { // phpcs:ignore WordPress.Security.NonceVerification.Recommended -- read-only GET filter, no state change.
+	if (!$query->is_search() || empty($_GET['product_cat'])) { // phpcs:ignore WordPress.Security.NonceVerification.Recommended -- read-only GET filter, no state change.
 		return;
 	}
 
-	$query->set( 'post_type', 'product' );
+	$query->set('post_type', 'product');
 	$query->set(
 		'tax_query', // phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_tax_query -- single top-level taxonomy filter on a user-facing search, not a repeated/expensive query.
 		array(
 			array(
 				'taxonomy' => 'product_cat',
-				'field'    => 'slug',
-				'terms'    => sanitize_title( wp_unslash( $_GET['product_cat'] ) ), // phpcs:ignore WordPress.Security.NonceVerification.Recommended -- read-only GET filter, no state change.
+				'field' => 'slug',
+				'terms' => sanitize_title(wp_unslash($_GET['product_cat'])), // phpcs:ignore WordPress.Security.NonceVerification.Recommended -- read-only GET filter, no state change.
 			),
 		)
 	);
 }
-add_action( 'pre_get_posts', 'techmart_filter_search_by_category' );
+add_action('pre_get_posts', 'techmart_filter_search_by_category');
 
 /**
  * Allow the shop archive to show the same scheduled deals as the homepage.
@@ -56,12 +57,13 @@ add_action( 'pre_get_posts', 'techmart_filter_search_by_category' );
  * @param string[] $vars Public query variables.
  * @return string[]
  */
-function techmart_register_product_collection_query_var( $vars ) {
+function techmart_register_product_collection_query_var($vars)
+{
 	$vars[] = 'techmart_collection';
 
 	return $vars;
 }
-add_filter( 'query_vars', 'techmart_register_product_collection_query_var' );
+add_filter('query_vars', 'techmart_register_product_collection_query_var');
 
 /**
  * Filter the shop archive for a TechMart product collection.
@@ -71,45 +73,46 @@ add_filter( 'query_vars', 'techmart_register_product_collection_query_var' );
  *
  * @param WP_Query $query Main WordPress query.
  */
-function techmart_filter_shop_for_product_collection( $query ) {
-	$collection = $query->get( 'techmart_collection' );
+function techmart_filter_shop_for_product_collection($query)
+{
+	$collection = $query->get('techmart_collection');
 
-	if ( is_admin() || ! $query->is_main_query() || ! in_array( $collection, array( 'trending', 'weekly-deals' ), true ) ) {
+	if (is_admin() || !$query->is_main_query() || !in_array($collection, array('trending', 'weekly-deals'), true)) {
 		return;
 	}
 
-	$is_shop_query = $query->is_post_type_archive( 'product' )
-		|| 'product' === $query->get( 'post_type' )
-		|| (int) $query->get( 'page_id' ) === wc_get_page_id( 'shop' );
+	$is_shop_query = $query->is_post_type_archive('product')
+		|| 'product' === $query->get('post_type')
+		|| (int) $query->get('page_id') === wc_get_page_id('shop');
 
-	if ( ! $is_shop_query ) {
+	if (!$is_shop_query) {
 		return;
 	}
 
-	if ( 'trending' === $collection ) {
-		$featured_ids = array_filter( array_map( 'absint', wc_get_featured_product_ids() ) );
-		$query->set( 'post__in', ! empty( $featured_ids ) ? $featured_ids : array( 0 ) );
+	if ('trending' === $collection) {
+		$featured_ids = array_filter(array_map('absint', wc_get_featured_product_ids()));
+		$query->set('post__in', !empty($featured_ids) ? $featured_ids : array(0));
 
 		return;
 	}
 
-	$on_sale_ids = array_filter( array_map( 'absint', wc_get_product_ids_on_sale() ) );
-	$query->set( 'post__in', ! empty( $on_sale_ids ) ? $on_sale_ids : array( 0 ) );
+	$on_sale_ids = array_filter(array_map('absint', wc_get_product_ids_on_sale()));
+	$query->set('post__in', !empty($on_sale_ids) ? $on_sale_ids : array(0));
 
-	$meta_query   = (array) $query->get( 'meta_query' );
+	$meta_query = (array) $query->get('meta_query');
 	$meta_query[] = array(
-		'key'     => '_sale_price_dates_to',
-		'value'   => time(),
+		'key' => '_sale_price_dates_to',
+		'value' => time(),
 		'compare' => '>',
-		'type'    => 'NUMERIC',
+		'type' => 'NUMERIC',
 	);
 
-	$query->set( 'meta_query', $meta_query ); // phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_meta_query -- required scheduled-sale filter.
-	$query->set( 'meta_key', '_sale_price_dates_to' ); // phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_meta_key -- sorts deals by their genuine expiry.
-	$query->set( 'orderby', 'meta_value_num' );
-	$query->set( 'order', 'ASC' );
+	$query->set('meta_query', $meta_query); // phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_meta_query -- required scheduled-sale filter.
+	$query->set('meta_key', '_sale_price_dates_to'); // phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_meta_key -- sorts deals by their genuine expiry.
+	$query->set('orderby', 'meta_value_num');
+	$query->set('order', 'ASC');
 }
-add_action( 'pre_get_posts', 'techmart_filter_shop_for_product_collection', 20 );
+add_action('pre_get_posts', 'techmart_filter_shop_for_product_collection', 20);
 
 /**
  * Keep the header cart UI correct under full-page caching.
@@ -130,12 +133,13 @@ add_action( 'pre_get_posts', 'techmart_filter_shop_for_product_collection', 20 )
  * @param array $fragments Existing fragment selectors => HTML.
  * @return array
  */
-function techmart_cart_fragments( $fragments ) {
-	$count = ( function_exists( 'WC' ) && WC()->cart ) ? WC()->cart->get_cart_contents_count() : 0;
+function techmart_cart_fragments($fragments)
+{
+	$count = (function_exists('WC') && WC()->cart) ? WC()->cart->get_cart_contents_count() : 0;
 
 	ob_start();
 	?>
-	<span class="tm-badge-count tm-cart-count"><?php echo esc_html( $count ); ?></span>
+	<span class="tm-badge-count tm-cart-count"><?php echo esc_html($count); ?></span>
 	<?php
 	$fragments['.tm-cart-count'] = ob_get_clean();
 
@@ -145,7 +149,7 @@ function techmart_cart_fragments( $fragments ) {
 
 	return $fragments;
 }
-add_filter( 'woocommerce_add_to_cart_fragments', 'techmart_cart_fragments' );
+add_filter('woocommerce_add_to_cart_fragments', 'techmart_cart_fragments');
 
 /**
  * Wishlist: techmart_get_wishlist_count() and techmart_get_wishlist_url()
@@ -171,37 +175,38 @@ add_filter( 'woocommerce_add_to_cart_fragments', 'techmart_cart_fragments' );
  * @param int $limit Number of products to return.
  * @return WC_Product[]
  */
-function techmart_get_trending_products( $limit = 8 ) {
+function techmart_get_trending_products($limit = 8)
+{
 	$featured_ids = wc_get_featured_product_ids();
 
 	$args = array(
 		'status' => 'publish',
-		'limit'  => $limit,
+		'limit' => $limit,
 	);
 
-	if ( ! empty( $featured_ids ) ) {
+	if (!empty($featured_ids)) {
 		$args['include'] = $featured_ids;
 	} else {
 		$args['orderby'] = 'date';
-		$args['order']   = 'DESC';
+		$args['order'] = 'DESC';
 	}
 
-	$args     = apply_filters( 'techmart_trending_products_args', $args );
-	$products = wc_get_products( $args );
+	$args = apply_filters('techmart_trending_products_args', $args);
+	$products = wc_get_products($args);
 
-	if ( ! empty( $featured_ids ) && count( $products ) < $limit ) {
+	if (!empty($featured_ids) && count($products) < $limit) {
 		$fill_args = apply_filters(
 			'techmart_trending_products_fill_args',
 			array(
-				'status'  => 'publish',
-				'limit'   => $limit - count( $products ),
+				'status' => 'publish',
+				'limit' => $limit - count($products),
 				'exclude' => $featured_ids,
 				'orderby' => 'date',
-				'order'   => 'DESC',
+				'order' => 'DESC',
 			)
 		);
 
-		$products = array_merge( $products, wc_get_products( $fill_args ) );
+		$products = array_merge($products, wc_get_products($fill_args));
 	}
 
 	return $products;
@@ -218,17 +223,18 @@ function techmart_get_trending_products( $limit = 8 ) {
  * @param int $limit Number of products to return.
  * @return WC_Product[]
  */
-function techmart_get_best_selling_products( $limit = 8 ) {
+function techmart_get_best_selling_products($limit = 8)
+{
 	$args = apply_filters(
 		'techmart_best_selling_products_args',
 		array(
-			'status'  => 'publish',
-			'limit'   => $limit,
+			'status' => 'publish',
+			'limit' => $limit,
 			'orderby' => 'popularity',
 		)
 	);
 
-	return wc_get_products( $args );
+	return wc_get_products($args);
 }
 
 /**
@@ -253,36 +259,37 @@ function techmart_get_best_selling_products( $limit = 8 ) {
  * @param int $limit Number of products to return.
  * @return WC_Product[]
  */
-function techmart_get_weekly_deal_products( $limit = 5 ) {
+function techmart_get_weekly_deal_products($limit = 5)
+{
 	$on_sale_ids = wc_get_product_ids_on_sale();
 
-	if ( empty( $on_sale_ids ) ) {
+	if (empty($on_sale_ids)) {
 		return array();
 	}
 
 	$args = apply_filters(
 		'techmart_weekly_deals_args',
 		array(
-			'status'     => 'publish',
-			'include'    => $on_sale_ids,
-			'limit'      => -1,
-			'orderby'    => 'meta_value_num',
-			'meta_key'   => '_sale_price_dates_to', // phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_meta_key
-			'order'      => 'ASC',
+			'status' => 'publish',
+			'include' => $on_sale_ids,
+			'limit' => -1,
+			'orderby' => 'meta_value_num',
+			'meta_key' => '_sale_price_dates_to', // phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_meta_key
+			'order' => 'ASC',
 			'meta_query' => array( // phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_meta_query
 				array(
-					'key'     => '_sale_price_dates_to',
-					'value'   => 0,
+					'key' => '_sale_price_dates_to',
+					'value' => 0,
 					'compare' => '>',
-					'type'    => 'NUMERIC',
+					'type' => 'NUMERIC',
 				),
 			),
 		)
 	);
 
-	$products = wc_get_products( $args );
+	$products = wc_get_products($args);
 
-	return array_slice( $products, 0, $limit );
+	return array_slice($products, 0, $limit);
 }
 
 /**
@@ -302,34 +309,35 @@ function techmart_get_weekly_deal_products( $limit = 5 ) {
  * @param WC_Product $product
  * @return array List of { 'type' => string, 'label' => string }.
  */
-function techmart_get_product_badges( $product ) {
+function techmart_get_product_badges($product)
+{
 	$badges = array();
 
-	if ( $product->is_on_sale() ) {
-		$percent  = techmart_get_sale_percentage( $product );
+	if ($product->is_on_sale()) {
+		$percent = techmart_get_sale_percentage($product);
 		$badges[] = array(
-			'type'  => 'sale',
-			'label' => $percent ? '-' . $percent . '%' : __( 'Sale', 'techmart' ),
+			'type' => 'sale',
+			'label' => $percent ? '-' . $percent . '%' : __('Sale', 'techmart'),
 		);
 	}
 
-	$new_days = (int) apply_filters( 'techmart_new_badge_days', 30 );
-	$created  = $product->get_date_created();
+	$new_days = (int) apply_filters('techmart_new_badge_days', 30);
+	$created = $product->get_date_created();
 
-	if ( $created && ( time() - $created->getTimestamp() ) <= ( $new_days * DAY_IN_SECONDS ) ) {
+	if ($created && (time() - $created->getTimestamp()) <= ($new_days * DAY_IN_SECONDS)) {
 		$badges[] = array(
-			'type'  => 'new',
-			'label' => __( 'New', 'techmart' ),
+			'type' => 'new',
+			'label' => __('New', 'techmart'),
 		);
 	}
 
-	$min_rating = (float) apply_filters( 'techmart_top_rated_min_average', 4.5 );
-	$min_count  = (int) apply_filters( 'techmart_top_rated_min_count', 5 );
+	$min_rating = (float) apply_filters('techmart_top_rated_min_average', 4.5);
+	$min_count = (int) apply_filters('techmart_top_rated_min_count', 5);
 
-	if ( $product->get_average_rating() >= $min_rating && $product->get_rating_count() >= $min_count ) {
+	if ($product->get_average_rating() >= $min_rating && $product->get_rating_count() >= $min_count) {
 		$badges[] = array(
-			'type'  => 'top-rated',
-			'label' => __( 'Top Rated', 'techmart' ),
+			'type' => 'top-rated',
+			'label' => __('Top Rated', 'techmart'),
 		);
 	}
 
@@ -350,27 +358,28 @@ function techmart_get_product_badges( $product ) {
  * @param WC_Product $product
  * @return int Whole-number percentage, or 0 if not computable.
  */
-function techmart_get_sale_percentage( $product ) {
+function techmart_get_sale_percentage($product)
+{
 	$regular = (float) $product->get_regular_price();
-	$sale    = (float) $product->get_sale_price();
+	$sale = (float) $product->get_sale_price();
 
-	if ( $product->is_type( 'variable' ) ) {
-		$min_regular = (float) $product->get_variation_regular_price( 'min' );
-		$max_regular = (float) $product->get_variation_regular_price( 'max' );
+	if ($product->is_type('variable')) {
+		$min_regular = (float) $product->get_variation_regular_price('min');
+		$max_regular = (float) $product->get_variation_regular_price('max');
 
-		if ( $min_regular !== $max_regular ) {
+		if ($min_regular !== $max_regular) {
 			return 0;
 		}
 
 		$regular = $min_regular;
-		$sale    = (float) $product->get_variation_sale_price( 'min' );
+		$sale = (float) $product->get_variation_sale_price('min');
 	}
 
-	if ( $regular <= 0 || $sale <= 0 || $sale >= $regular ) {
+	if ($regular <= 0 || $sale <= 0 || $sale >= $regular) {
 		return 0;
 	}
 
-	return (int) round( ( ( $regular - $sale ) / $regular ) * 100 );
+	return (int) round((($regular - $sale) / $regular) * 100);
 }
 
 /**
@@ -404,8 +413,9 @@ function techmart_get_sale_percentage( $product ) {
  *
  * @return array
  */
-function techmart_get_brands() {
-	return apply_filters( 'techmart_brands', array() );
+function techmart_get_brands()
+{
+	return apply_filters('techmart_brands', array());
 }
 
 /**
@@ -422,17 +432,18 @@ function techmart_get_brands() {
  *
  * @return array List of { 'title' => string, 'icon' => string (HTML, may be empty) }.
  */
-function techmart_get_payment_methods() {
-	if ( ! function_exists( 'WC' ) || ! WC()->payment_gateways() ) {
+function techmart_get_payment_methods()
+{
+	if (!function_exists('WC') || !WC()->payment_gateways()) {
 		return array();
 	}
 
 	$methods = array();
 
-	foreach ( WC()->payment_gateways()->get_available_payment_gateways() as $gateway ) {
+	foreach (WC()->payment_gateways()->get_available_payment_gateways() as $gateway) {
 		$methods[] = array(
 			'title' => $gateway->get_title(),
-			'icon'  => $gateway->get_icon(),
+			'icon' => $gateway->get_icon(),
 		);
 	}
 
@@ -459,27 +470,29 @@ function techmart_get_payment_methods() {
  * (see techmart_dequeue_woocommerce_styles()'s neighboring remove_action
  * calls) with one that actually matches this theme's container system.
  */
-function techmart_single_product_wrapper_start() {
-	if ( ! is_product() ) {
+function techmart_single_product_wrapper_start()
+{
+	if (!is_product()) {
 		return;
 	}
 	?>
 	<div id="primary" class="tm-container tm-single-product">
-		<nav class="tm-breadcrumb" aria-label="<?php esc_attr_e( 'Breadcrumb', 'techmart' ); ?>">
+		<nav class="tm-breadcrumb" aria-label="<?php esc_attr_e('Breadcrumb', 'techmart'); ?>">
 			<?php woocommerce_breadcrumb(); ?>
 		</nav>
-	<?php
+		<?php
 }
-add_action( 'woocommerce_before_main_content', 'techmart_single_product_wrapper_start' );
+add_action('woocommerce_before_main_content', 'techmart_single_product_wrapper_start');
 
-function techmart_single_product_wrapper_end() {
-	if ( ! is_product() ) {
+function techmart_single_product_wrapper_end()
+{
+	if (!is_product()) {
 		return;
 	}
 
 	echo '</div>';
 }
-add_action( 'woocommerce_after_main_content', 'techmart_single_product_wrapper_end' );
+add_action('woocommerce_after_main_content', 'techmart_single_product_wrapper_end');
 
 /**
  * Wraps the native add-to-cart hook output in an element with a stable
@@ -488,42 +501,61 @@ add_action( 'woocommerce_after_main_content', 'techmart_single_product_wrapper_e
  * woocommerce_template_single_add_to_cart at its default priority 30
  * without touching that function itself.
  */
-function techmart_single_add_to_cart_wrap_start() {
+function techmart_single_add_to_cart_wrap_start()
+{
 	echo '<div id="tm-add-to-cart">';
 }
-add_action( 'woocommerce_single_product_summary', 'techmart_single_add_to_cart_wrap_start', 29 );
+add_action('woocommerce_single_product_summary', 'techmart_single_add_to_cart_wrap_start', 29);
 
-function techmart_single_add_to_cart_wrap_end() {
+function techmart_single_add_to_cart_wrap_end()
+{
 	echo '</div>';
 }
-add_action( 'woocommerce_single_product_summary', 'techmart_single_add_to_cart_wrap_end', 31 );
+add_action('woocommerce_single_product_summary', 'techmart_single_add_to_cart_wrap_end', 31);
+
+add_action('woocommerce_single_product_summary', 'techmart_single_product_discount_badge', 11); // right after price (10)
+
+function techmart_single_product_discount_badge()
+{
+	global $product;
+
+	if (!$product->is_on_sale() || $product->is_type('variable'))
+		return;
+
+	$regular = (float) $product->get_regular_price();
+	$sale = (float) $product->get_sale_price();
+	if ($regular <= 0)
+		return;
+
+	$percent = round((($regular - $sale) / $regular) * 100);
+
+	printf('<span class="tm-badge tm-badge--sale tm-single-product__discount-badge">-%d%%</span>', esc_html($percent));
+}
 
 /**
  * Wishlist button, placed right after add-to-cart (priority 30) and
  * before product meta (priority 40). Same documented integration point
  * as the product card — see the wishlist functions above.
  */
-function techmart_single_product_wishlist_button() {
+function techmart_single_product_wishlist_button()
+{
 	global $product;
 
-	if ( ! $product instanceof WC_Product ) {
+	if (!$product instanceof WC_Product) {
 		return;
 	}
 
-	$in_wishlist = techmart_is_in_wishlist( $product->get_id() );
+	$in_wishlist = techmart_is_in_wishlist($product->get_id());
 	?>
-	<button
-		type="button"
-		class="tm-wishlist-toggle tm-single-product__wishlist tm-button tm-button--secondary"
-		data-product-id="<?php echo esc_attr( $product->get_id() ); ?>"
-		aria-pressed="<?php echo $in_wishlist ? 'true' : 'false'; ?>"
-	>
-		<?php techmart_icon( 'heart' ); ?>
-		<?php esc_html_e( 'Add to Wishlist', 'techmart' ); ?>
-	</button>
-	<?php
+		<button type="button" class="tm-wishlist-toggle tm-single-product__wishlist tm-button tm-button--secondary"
+			data-product-id="<?php echo esc_attr($product->get_id()); ?>"
+			aria-pressed="<?php echo $in_wishlist ? 'true' : 'false'; ?>">
+			<?php techmart_icon('heart'); ?>
+			<?php esc_html_e('Add to Wishlist', 'techmart'); ?>
+		</button>
+		<?php
 }
-add_action( 'woocommerce_single_product_summary', 'techmart_single_product_wishlist_button', 35 );
+add_action('woocommerce_single_product_summary', 'techmart_single_product_wishlist_button', 35);
 
 /**
  * Shipping & Returns tab.
@@ -534,18 +566,20 @@ add_action( 'woocommerce_single_product_summary', 'techmart_single_product_wishl
  * touch how the existing description/reviews/additional-information
  * tabs are built or styled.
  */
-function techmart_add_shipping_tab( $tabs ) {
+function techmart_add_shipping_tab($tabs)
+{
 	$tabs['techmart_shipping'] = array(
-		'title'    => __( 'Shipping & Returns', 'techmart' ),
+		'title' => __('Shipping & Returns', 'techmart'),
 		'priority' => 25,
 		'callback' => 'techmart_shipping_tab_content',
 	);
 
 	return $tabs;
 }
-add_filter( 'woocommerce_product_tabs', 'techmart_add_shipping_tab' );
+add_filter('woocommerce_product_tabs', 'techmart_add_shipping_tab');
 
-function techmart_shipping_tab_content() {
+function techmart_shipping_tab_content()
+{
 	/**
 	 * Static, filterable copy rather than a Customizer field — this is
 	 * boilerplate policy text most stores write once and rarely change;
@@ -556,25 +590,60 @@ function techmart_shipping_tab_content() {
 		'techmart_shipping_tab_content',
 		sprintf(
 			'<p>%s</p><p>%s</p>',
-			esc_html__( 'Orders are processed within 1–2 business days and shipped via our standard carrier. You will receive a tracking number by email once your order ships.', 'techmart' ),
-			esc_html__( 'Items can be returned within 30 days of delivery in their original condition. See our full Returns & Refunds policy for details.', 'techmart' )
+			esc_html__('Orders are processed within 1–2 business days and shipped via our standard carrier. You will receive a tracking number by email once your order ships.', 'techmart'),
+			esc_html__('Items can be returned within 30 days of delivery in their original condition. See our full Returns & Refunds policy for details.', 'techmart')
 		)
 	);
 
-	echo wp_kses_post( $content );
+	echo wp_kses_post($content);
 }
 
 /**
  * Sticky mobile add-to-cart bar. Hooked after the whole product wrapper
  * closes since it's a fixed-position overlay, not in-flow content.
  */
-function techmart_single_product_sticky_bar() {
+function techmart_single_product_sticky_bar()
+{
 	global $product;
 
-	if ( ! $product instanceof WC_Product ) {
+	if (!$product instanceof WC_Product) {
 		return;
 	}
 
-	techmart_get_template_part( 'template-parts/product/sticky-bar', null, array( 'product' => $product ) );
+	techmart_get_template_part('template-parts/product/sticky-bar', null, array('product' => $product));
 }
-add_action( 'woocommerce_after_single_product', 'techmart_single_product_sticky_bar' );
+add_action('woocommerce_after_single_product', 'techmart_single_product_sticky_bar');
+
+
+/**
+ * Trust badges below the add-to-cart button on single product pages. The
+ * client asked for these in Phase 5, so this is the first inc/ file to
+ * add a hook to a WooCommerce template. The badges are static, filterable
+ * copy rather than a Customizer field — this is boilerplate trust content most stores write once and rarely change; a filter is the appropriate amount of configurability for that, same reasoning as techmart_trust_items in Phase 5.
+ */
+add_action('woocommerce_single_product_summary', 'techmart_single_product_trust_badges', 35); // between add-to-cart (30) and meta (40)
+
+function techmart_single_product_trust_badges()
+{
+	$items = array(
+		array('title' => __('Free Shipping', 'techmart'), 'svg' => '<rect x="1" y="3" width="15" height="13"></rect><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"></polygon><circle cx="5.5" cy="18.5" r="2.5"></circle><circle cx="18.5" cy="18.5" r="2.5"></circle>'),
+		array('title' => __('Secure Payment', 'techmart'), 'svg' => '<path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>'),
+		array('title' => __('Easy Returns', 'techmart'), 'svg' => '<polyline points="1 4 1 10 7 10"></polyline><path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"></path>'),
+	);
+	?>
+		<div class="tm-single-product__trust-strip">
+			<?php foreach ($items as $item): ?>
+				<div class="tm-trust-item tm-trust-item--inline">
+					<span class="tm-trust-item__icon">
+						<span class="tm-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+								stroke-linecap="round"
+								stroke-linejoin="round"><?php echo $item['svg']; // fixed icon markup, not user input ?></svg></span>
+					</span>
+					<span class="tm-trust-item__text">
+						<span class="tm-trust-item__title"><?php echo esc_html($item['title']); ?></span>
+					</span>
+				</div>
+			<?php endforeach; ?>
+		</div>
+		<?php
+}

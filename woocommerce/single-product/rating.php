@@ -14,12 +14,12 @@
  * @package TechMart
  */
 
-defined( 'ABSPATH' ) || exit;
+defined('ABSPATH') || exit;
 
 global $product;
 
-if ( ! $product instanceof WC_Product || 0 === $product->get_rating_count() ) {
+if (!$product instanceof WC_Product || 0 === $product->get_rating_count()) {
 	return;
 }
 
-techmart_rating( $product->get_average_rating(), $product->get_rating_count() );
+techmart_rating($product->get_average_rating(), $product->get_rating_count());

@@ -356,5 +356,49 @@
         td.insertBefore(wrapper, td.firstChild);
       });
     });
+
+    document.addEventListener("DOMContentLoaded", function () {
+      document
+        .querySelectorAll("form.cart .quantity")
+        .forEach(function (wrapper) {
+          if (wrapper.querySelector(".tm-qty-btn")) return;
+
+          var input = wrapper.querySelector("input.qty");
+          if (!input) return;
+
+          var minus = document.createElement("button");
+          minus.type = "button";
+          minus.className = "tm-qty-btn tm-qty-btn--minus";
+          minus.textContent = "\u2212";
+          minus.setAttribute("aria-label", "Decrease quantity");
+
+          var plus = document.createElement("button");
+          plus.type = "button";
+          plus.className = "tm-qty-btn tm-qty-btn--plus";
+          plus.textContent = "+";
+          plus.setAttribute("aria-label", "Increase quantity");
+
+          wrapper.classList.add("tm-quantity--stepper");
+          wrapper.insertBefore(minus, input);
+          wrapper.appendChild(plus);
+
+          var step = parseInt(input.step, 10) || 1;
+          var min = input.min !== "" ? parseInt(input.min, 10) : 1;
+          var max = input.max !== "" ? parseInt(input.max, 10) : Infinity;
+
+          function setValue(v) {
+            v = Math.min(max, Math.max(min, v));
+            input.value = v;
+            input.dispatchEvent(new Event("change", { bubbles: true }));
+          }
+
+          minus.addEventListener("click", function () {
+            setValue((parseInt(input.value, 10) || min) - step);
+          });
+          plus.addEventListener("click", function () {
+            setValue((parseInt(input.value, 10) || min) + step);
+          });
+        });
+    });
   }
 })();
