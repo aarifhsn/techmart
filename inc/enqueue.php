@@ -262,3 +262,19 @@ function techmart_order_tracking_content($content)
 
 	return '<div class="techmart-order-tracking">' . $content . $help . '</div>';
 }
+
+/**
+ * Exclude the "Uncategorized" product category from the product category
+ * archive list. This is a common WooCommerce customization, and this
+ * theme's design system doesn't include a style for an "Uncategorized"
+ * category card, so it's excluded by default.
+ */
+add_filter('get_terms_args', function ($args, $taxonomies) {
+	if (in_array('product_cat', (array) $taxonomies, true)) {
+		$args['exclude'] = array_merge(
+			(array) ($args['exclude'] ?? array()),
+			array(get_option('default_product_cat')) // WooCommerce's stored ID for "Uncategorized"
+		);
+	}
+	return $args;
+}, 10, 2);

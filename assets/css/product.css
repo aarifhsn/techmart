@@ -38,7 +38,8 @@ ul.products {
  */
 .related ul.products,
 .upsells ul.products,
-.cross-sells ul.products {
+.cross-sells ul.products,
+.tm-weekly-deals .tm-product-grid {
   display: flex;
   flex-wrap: wrap;
   gap: var(--tm-space-6);
