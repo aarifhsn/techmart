@@ -22,6 +22,28 @@
   gap: var(--tm-space-6);
 }
 
+.product > .woocommerce-tabs,
+.product > .related,
+.product > .upsells {
+  grid-column: 1 / -1;
+}
+
+/*
+ * Variable/few-item contexts (related products, upsells, cross-sells)
+ * — repeat(5, 1fr) always makes 5 equal columns no matter how many
+ * items exist, leaving big dead gaps when there are only 2–4. Flex
+ * packs them tightly instead, with no fixed column count to fight.
+ * One rule, covering every place this pattern is needed, instead of
+ * two disagreeing one-offs scattered across other files.
+ */
+.related ul.products,
+.upsells ul.products,
+.cross-sells ul.products {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--tm-space-6);
+}
+
 /* ul.columns-4 {
   display: flex;
   gap: var(--tm-space-6);

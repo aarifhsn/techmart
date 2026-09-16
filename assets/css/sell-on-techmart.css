@@ -124,4 +124,35 @@
   border-radius: var(--tm-radius-sm);
 }
 
+.tm-sell-apply__notice {
+  padding: var(--tm-space-4);
+  border-radius: var(--tm-radius-md);
+  font-weight: var(--tm-fw-semibold);
+  margin-bottom: var(--tm-space-4);
+}
+
+.tm-sell-apply__notice--success {
+  background: color-mix(
+    in srgb,
+    var(--tm-color-success) 12%,
+    var(--tm-color-white)
+  );
+  border-left: 3px solid var(--tm-color-success);
+  color: var(--tm-color-dark);
+}
+
+.tm-sell-apply__notice--error {
+  background: color-mix(
+    in srgb,
+    var(--tm-color-sale) 12%,
+    var(--tm-color-white)
+  );
+  border-left: 3px solid var(--tm-color-sale);
+  color: var(--tm-color-dark);
+}
+
+#tm-sell-apply {
+  scroll-margin-top: var(--tm-space-8);
+}
+
 /* responsive.css: collapse .tm-sell-benefits__grid / .tm-sell-steps__list to 1–2 columns below your usual breakpoint */

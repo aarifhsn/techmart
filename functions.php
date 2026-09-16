@@ -13,13 +13,13 @@
  * @package TechMart
  */
 
-if ( ! defined( 'ABSPATH' ) ) {
+if (!defined('ABSPATH')) {
 	exit; // Disallow direct access.
 }
 
-define( 'TECHMART_VERSION', '1.0.0' );
-define( 'TECHMART_DIR', get_template_directory() );
-define( 'TECHMART_URI', get_template_directory_uri() );
+define('TECHMART_VERSION', '1.0.0');
+define('TECHMART_DIR', get_template_directory());
+define('TECHMART_URI', get_template_directory_uri());
 
 /**
  * Phase 1 modules.
@@ -59,3 +59,7 @@ require TECHMART_DIR . '/inc/performance.php';
  * registering AJAX actions.
  */
 require TECHMART_DIR . '/inc/wishlist.php';
+
+// Post-launch addition: a private CPT for Sell-on-TechMart applications, so
+// submissions can be reviewed in wp-admin without needing an email/SMTP setup.
+require get_theme_file_path('inc/sell-applications.php');

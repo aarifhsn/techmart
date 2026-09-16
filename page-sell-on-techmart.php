@@ -93,12 +93,24 @@ get_header();
         </details>
     </section>
 
+    <?php
+    $tm_sell_status = isset($_GET['techmart_sell_application']) ? sanitize_key($_GET['techmart_sell_application']) : '';
+    ?>
+
     <section id="tm-sell-apply" class="tm-sell-apply">
         <h2 class="tm-section-header__title">Apply to sell</h2>
+
+        <?php if ('success' === $tm_sell_status): ?>
+            <p class="tm-sell-apply__notice tm-sell-apply__notice--success">Thanks — we've received your application and
+                will be in touch.</p>
+        <?php elseif ('error' === $tm_sell_status): ?>
+            <p class="tm-sell-apply__notice tm-sell-apply__notice--error">Please fill in your business name and a valid
+                email, then try again.</p>
+        <?php endif; ?>
+
         <p>Leave your details and we'll follow up with next steps.</p>
 
-        <form class="tm-sell-apply__form" method="post"
-            action="<?php echo esc_url(admin_url('admin-post.php')); ?>">
+        <form class="tm-sell-apply__form" method="post" action="<?php echo esc_url(admin_url('admin-post.php')); ?>">
             <?php wp_nonce_field('techmart_sell_apply', 'techmart_sell_apply_nonce'); ?>
             <input type="hidden" name="action" value="techmart_sell_apply">
 

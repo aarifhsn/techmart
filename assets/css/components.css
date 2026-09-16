@@ -404,11 +404,11 @@ img {
   gap: 6rem;
 }
 
-.wp-singular ul.products {
+/* .wp-singular ul.products {
   display: flex;
   flex-flow: wrap row;
   gap: var(--tm-space-6);
-}
+} */
 /* ---------- Order tracking ---------- */
 
 .techmart-order-tracking {
