@@ -364,7 +364,6 @@
   padding: var(--tm-space-10);
   background: var(--tm-color-primary);
   border-radius: var(--tm-radius-lg);
-  margin-bottom: 2rem;
 }
 
 .tm-newsletter__title {
