@@ -167,6 +167,16 @@ function techmart_enqueue_assets()
 			)
 		);
 	}
+
+	// Sell on TechMart page: form validation and submission handling.
+	if (is_page_template('page-sell-on-techmart.php')) {
+		wp_enqueue_style(
+			'techmart-sell-page',
+			get_theme_file_uri('assets/css/sell-on-techmart.css'),
+			array('techmart-base'), // swap in your actual tokens/base stylesheet handle
+			wp_get_theme()->get('Version')
+		);
+	}
 }
 add_action('wp_enqueue_scripts', 'techmart_enqueue_assets');
 

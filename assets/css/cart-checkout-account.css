@@ -26,7 +26,7 @@
 .shop_table th {
   padding-block: var(--tm-space-3);
   text-align: left;
-  font-size: var(--tm-fs-small);
+  font-size: var(--tm-fs-xs);
   text-transform: uppercase;
   letter-spacing: 0.03em;
   color: var(--tm-color-body);
@@ -43,15 +43,6 @@
   padding: 0 10px;
   text-align: center;
   white-space: nowrap;
-}
-
-.woocommerce-cart .tm-page__content .woocommerce {
-  display: flex;
-  gap: var(--tm-space-8);
-}
-
-.woocommerce-cart .tm-page__content .woocommerce .woocommerce-cart-form {
-  flex: 1 1 0;
 }
 
 /* ---------- Cart page ---------- */
@@ -96,16 +87,26 @@
 }
 
 .cart .actions {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: var(--tm-space-4);
   padding-top: var(--tm-space-5);
+  overflow: hidden; /* clearfix — keeps the row's height from collapsing around the floats */
+}
+
+.tm-cart-actions__inner {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between; /* coupon block left, Update cart pushed to the far right */
+  gap: var(--tm-space-4);
+  width: 100%;
 }
 
 .coupon {
-  display: flex;
+  display: flex; /* fine here — .coupon is a div, not a td, so it's not affected by the earlier bug */
+  flex-wrap: wrap;
+  align-items: center;
   gap: var(--tm-space-2);
+  float: left; /* shrink-to-fit width instead of stretching full row, sits at the left edge */
+  max-width: 80%; /* explicit basis — prevents the auto-width collapse flex-wrap caused */
 }
 
 .coupon .input-text {
@@ -233,14 +234,15 @@
   border-radius: var(--tm-radius-md);
 }
 
-/* .woocommerce-form-login,
 .woocommerce-form-coupon {
   grid-column: 1 / -1;
   padding: var(--tm-space-5);
   margin-bottom: var(--tm-space-5);
   background: var(--tm-color-surface);
   border-radius: var(--tm-radius-md);
-} */
+  display: flex;
+  align-items: center;
+}
 
 .woocommerce-checkout form.woocommerce-form-login,
 .woocommerce-checkout form.checkout_coupon {
@@ -319,7 +321,7 @@
 /* ---------- My Account ---------- */
 .woocommerce-account .woocommerce {
   display: grid;
-  /* grid-template-columns: 240px 1fr; */
+  grid-template-columns: 240px 1fr;
   gap: var(--tm-space-8);
   align-items: start;
 }
@@ -405,11 +407,6 @@
   justify-content: flex-end;
 }
 
-.coupon .input-text {
-  width: 220px;
-  max-width: 100%;
-}
-
 .coupon .button,
 .cart button[name="update_cart"] {
   padding: var(--tm-space-3) var(--tm-space-5);
@@ -419,13 +416,21 @@
   white-space: nowrap;
 }
 
+.cart .actions button[name="update_cart"] {
+  float: right; /* sits at the right edge, same line as .coupon */
+}
+
 .coupon .button:hover,
 .cart button[name="update_cart"]:hover {
   background: #000;
 }
 
-.cart .actions {
-  border-bottom: none;
+.coupon .coupon-error-notice {
+  flex-basis: 100%;
+  width: 100%;
+  margin-top: var(--tm-space-2);
+  font-size: var(--tm-fs-small);
+  color: var(--tm-color-sale);
 }
 
 .product-remove span.screen-reader-text {
@@ -445,4 +450,22 @@
   color: var(--tm-color-white);
   font-weight: var(--tm-fw-semibold);
   white-space: nowrap;
+}
+
+.woocommerce-cart .tm-page__content .woocommerce {
+  display: flex;
+  flex-wrap: wrap; /* NEW — lets the notices row break onto its own line */
+  gap: var(--tm-space-8);
+}
+
+.woocommerce-cart .tm-page__content .woocommerce-notices-wrapper {
+  flex-basis: 100%; /* NEW — always spans the full row width */
+}
+
+.woocommerce-cart .tm-page__content .woocommerce-notices-wrapper:empty {
+  display: none; /* NEW — avoids an empty gap when there's no message to show */
+}
+
+.woocommerce-cart .tm-page__content .woocommerce .woocommerce-cart-form {
+  flex: 1 1 0;
 }
