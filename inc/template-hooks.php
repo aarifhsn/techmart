@@ -38,7 +38,7 @@ function techmart_homepage_trending()
 			'section_class' => 'tm-trending',
 			'aria_label' => __('Trending products', 'techmart'),
 			'title' => __('Trending Products', 'techmart'),
-			'link_url' => add_query_arg( 'techmart_collection', 'trending', wc_get_page_permalink( 'shop' ) ),
+			'link_url' => add_query_arg('techmart_collection', 'trending', wc_get_page_permalink('shop')),
 			'link_text' => __('View All Products', 'techmart'),
 			'products' => techmart_get_trending_products(8),
 		)
