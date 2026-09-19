@@ -205,6 +205,10 @@
     flex-direction: row;
     flex-wrap: wrap;
   }
+
+  .tm-info-page ul.columns-4 {
+    grid-template-columns: repeat(3, 1fr);
+  }
 }
 
 /* Applied to <body> by app.js while the mobile off-canvas drawer is open. */
@@ -231,6 +235,7 @@
 
   /* Category filtering stays available via the drawer; dropping it
 	   here keeps the mobile search row from getting cramped. */
+
   .tm-search__category {
     display: none;
   }
@@ -374,6 +379,10 @@
   .form-row-last {
     width: 100%;
     margin-right: 0;
+  }
+
+  .tm-info-page ul.columns-4 {
+    grid-template-columns: repeat(2, 1fr);
   }
 }
 

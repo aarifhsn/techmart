@@ -22,11 +22,25 @@
   padding-bottom: var(--tm-space-16);
 }
 
+.tm-info-page ul.columns-4 {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--tm-space-5);
+}
+
 /* ---------- Prose ---------- */
 
 .tm-info-page__prose h2 {
   margin-top: var(--tm-space-10);
+  font-size: var(--tm-fs-h4);
 }
+
+.tm-info-page ul.columns-4 li h2 {
+  font-size: var(--tm-fs-h3);
+  margin-top: var(--tm-space-3);
+  margin-bottom: var(--tm-space-2);
+}
+
 .tm-info-page__prose h3 {
   margin-top: var(--tm-space-8);
 }
