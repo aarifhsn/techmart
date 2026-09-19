@@ -3,7 +3,7 @@
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: var(--tm-space-5) var(--tm-space-4);
-  max-width: 640px;
+  max-width: 870px;
 }
 
 /* Every field row is full-width by default... */
@@ -46,7 +46,7 @@
 .wpcf7-form-control {
   width: 100%;
   padding: var(--tm-space-3);
-  border: 1px solid var(--tm-color-border);
+  border: 1px solid var(--tm-color-border-dark);
   border-radius: var(--tm-radius-sm);
   background: var(--tm-color-white);
   font-family: inherit; /* form controls don't inherit font by default */
