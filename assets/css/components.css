@@ -634,3 +634,26 @@ button.woocommerce-button {
   border-radius: var(--tm-radius-md);
   background: var(--tm-color-white);
 }
+
+/* For Invoice */
+
+.woocommerce-order-received .woocommerce-table a.invoice {
+  background: var(--tm-color-primary);
+  width: 100%;
+  max-width: 150px;
+  color: var(--tm-color-white);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--tm-space-2) var(--tm-space-6);
+  border-radius: var(--tm-radius-sm);
+  font-weight: var(--tm-fw-semibold);
+  transition:
+    background var(--tm-transition-fast),
+    color var(--tm-transition-fast),
+    border-color var(--tm-transition-fast);
+}
+
+.woocommerce-order-received .woocommerce-table a.invoice:hover {
+  background: var(--tm-color-primary-hover);
+}
