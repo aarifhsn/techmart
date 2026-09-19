@@ -21,18 +21,18 @@
  * @package TechMart
  */
 
-if ( ! defined( 'ABSPATH' ) ) {
+if (!defined('ABSPATH')) {
 	exit;
 }
 
-$eyebrow        = get_theme_mod( 'techmart_hero_eyebrow', __( 'New Arrival', 'techmart' ) );
-$heading        = get_theme_mod( 'techmart_hero_heading', __( 'Modern technology. Built for everyday life.', 'techmart' ) );
-$description    = get_theme_mod( 'techmart_hero_description', __( 'Discover the latest in electronics — curated for performance, backed by real support.', 'techmart' ) );
-$primary_text   = get_theme_mod( 'techmart_hero_primary_text', __( 'Shop Now', 'techmart' ) );
-$primary_url    = get_theme_mod( 'techmart_hero_primary_url', '#' );
-$secondary_text = get_theme_mod( 'techmart_hero_secondary_text', __( 'Explore Deals', 'techmart' ) );
-$secondary_url  = get_theme_mod( 'techmart_hero_secondary_url', '#' );
-$image_id       = absint( get_theme_mod( 'techmart_hero_image', 0 ) );
+$eyebrow = get_theme_mod('techmart_hero_eyebrow', __('New Arrival', 'techmart'));
+$heading = get_theme_mod('techmart_hero_heading', __('Modern technology. Built for everyday life.', 'techmart'));
+$description = get_theme_mod('techmart_hero_description', __('Discover the latest in electronics — curated for performance, backed by real support.', 'techmart'));
+$primary_text = get_theme_mod('techmart_hero_primary_text', __('Shop Now', 'techmart'));
+$primary_url = get_theme_mod('techmart_hero_primary_url', '#');
+$secondary_text = get_theme_mod('techmart_hero_secondary_text', __('Explore Deals', 'techmart'));
+$secondary_url = get_theme_mod('techmart_hero_secondary_url', '#');
+$image_id = absint(get_theme_mod('techmart_hero_image', 0));
 
 /**
  * Trust-badges strip, stacked inside the banner card below the main
@@ -46,60 +46,60 @@ $hero_trust_items = apply_filters(
 	'techmart_hero_trust_items',
 	array(
 		array(
-			'icon'        => 'truck',
-			'title'       => __( 'Free Shipping', 'techmart' ),
-			'description' => __( 'On orders over $99', 'techmart' ),
+			'icon' => 'truck',
+			'title' => __('Free Shipping', 'techmart'),
+			'description' => __('On orders over ৳ 1500', 'techmart'),
 		),
 		array(
-			'icon'        => 'refresh',
-			'title'       => __( '30 Days Returns', 'techmart' ),
-			'description' => __( 'Money back guarantee', 'techmart' ),
+			'icon' => 'refresh',
+			'title' => __('30 Days Returns', 'techmart'),
+			'description' => __('Money back guarantee', 'techmart'),
 		),
 		array(
-			'icon'        => 'lock',
-			'title'       => __( 'Secure Payment', 'techmart' ),
-			'description' => __( '100% secure checkout', 'techmart' ),
+			'icon' => 'lock',
+			'title' => __('Secure Payment', 'techmart'),
+			'description' => __('100% secure checkout', 'techmart'),
 		),
 		array(
-			'icon'        => 'phone',
-			'title'       => __( '24/7 Support', 'techmart' ),
-			'description' => __( 'Dedicated support', 'techmart' ),
+			'icon' => 'phone',
+			'title' => __('24/7 Support', 'techmart'),
+			'description' => __('Dedicated support', 'techmart'),
 		),
 	)
 );
 ?>
-<section class="tm-hero tm-band" aria-label="<?php esc_attr_e( 'Featured promotion', 'techmart' ); ?>">
+<section class="tm-hero tm-band" aria-label="<?php esc_attr_e('Featured promotion', 'techmart'); ?>">
 	<div class="tm-container tm-hero__layout">
-		<?php get_template_part( 'template-parts/home/hero-categories' ); ?>
+		<?php get_template_part('template-parts/home/hero-categories'); ?>
 
-		<?php get_template_part( 'template-parts/home/hero-nav' ); ?>
+		<?php get_template_part('template-parts/home/hero-nav'); ?>
 
 		<div class="tm-hero__banner-card">
 			<div class="tm-hero__inner">
 				<div class="tm-hero__content">
-					<?php if ( $eyebrow ) : ?>
-						<p class="tm-hero__eyebrow tm-label"><?php echo esc_html( $eyebrow ); ?></p>
+					<?php if ($eyebrow): ?>
+						<p class="tm-hero__eyebrow tm-label"><?php echo esc_html($eyebrow); ?></p>
 					<?php endif; ?>
 
-					<h1 class="tm-hero__heading"><?php echo esc_html( $heading ); ?></h1>
+					<h1 class="tm-hero__heading"><?php echo esc_html($heading); ?></h1>
 
-					<?php if ( $description ) : ?>
-						<p class="tm-hero__description"><?php echo esc_html( $description ); ?></p>
+					<?php if ($description): ?>
+						<p class="tm-hero__description"><?php echo esc_html($description); ?></p>
 					<?php endif; ?>
 
 					<div class="tm-hero__actions">
 						<?php
 						techmart_button(
 							array(
-								'text'    => $primary_text,
-								'url'     => $primary_url,
+								'text' => $primary_text,
+								'url' => $primary_url,
 								'variant' => 'primary',
 							)
 						);
 						techmart_button(
 							array(
-								'text'    => $secondary_text,
-								'url'     => $secondary_url,
+								'text' => $secondary_text,
+								'url' => $secondary_url,
 								'variant' => 'secondary',
 							)
 						);
@@ -107,7 +107,7 @@ $hero_trust_items = apply_filters(
 					</div>
 				</div>
 
-				<?php if ( $image_id ) : ?>
+				<?php if ($image_id): ?>
 					<div class="tm-hero__media">
 						<?php
 						/**
@@ -125,8 +125,8 @@ $hero_trust_items = apply_filters(
 							'techmart-hero',
 							false,
 							array(
-								'class'         => 'tm-hero__image',
-								'loading'       => 'eager',
+								'class' => 'tm-hero__image',
+								'loading' => 'eager',
 								'fetchpriority' => 'high',
 							)
 						);
@@ -135,15 +135,15 @@ $hero_trust_items = apply_filters(
 				<?php endif; ?>
 			</div>
 
-			<?php if ( $hero_trust_items ) : ?>
+			<?php if ($hero_trust_items): ?>
 				<div class="tm-hero__trust-strip">
 					<div class="tm-hero__trust-strip-inner">
-						<?php foreach ( $hero_trust_items as $item ) : ?>
+						<?php foreach ($hero_trust_items as $item): ?>
 							<?php
 							techmart_get_template_part(
 								'template-parts/components/trust-item',
 								null,
-								array_merge( $item, array( 'layout' => 'inline' ) )
+								array_merge($item, array('layout' => 'inline'))
 							);
 							?>
 						<?php endforeach; ?>

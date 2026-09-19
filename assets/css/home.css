@@ -111,17 +111,20 @@
 .tm-hero__banner-card {
   grid-column: 2;
   grid-row: 2;
+  display: flex; /* NEW */
+  flex-direction: column; /* NEW */
   background: var(--tm-color-surface);
   border-radius: var(--tm-radius-lg);
-  overflow: hidden; /* clips the white trust-strip to the card's rounded corners */
+  overflow: hidden;
 }
 
 .tm-hero__inner {
+  flex: 1 1 auto; /* NEW — grows into the stretched space, keeping the trust strip pinned right under it instead of floating below a gap */
   display: grid;
   grid-template-columns: 1fr 1fr;
   align-items: center;
   gap: var(--tm-space-10);
-  padding: var(--tm-space-10);
+  padding: 0 var(--tm-space-10);
 }
 
 .tm-hero__eyebrow {
@@ -145,13 +148,17 @@
 }
 
 .tm-hero__media {
-  aspect-ratio: 12 / 7; /* matches the 1200x700 techmart-hero image size */
+  aspect-ratio: 12 / 12; /* matches the 1200x1200 techmart-hero image size */
+}
+
+.tm-hero__content {
+  padding: var(--tm-space-10) 0;
 }
 
 .tm-hero__image {
   width: 100%;
   height: 100%;
-  object-fit: contain;
+  object-fit: cover;
   border-radius: var(--tm-radius-lg);
 }
 
@@ -262,7 +269,7 @@
   align-items: center;
   justify-content: space-between;
   gap: var(--tm-space-8);
-  padding: var(--tm-space-12);
+  padding: 0 var(--tm-space-12);
 }
 
 .tm-promo__eyebrow {

@@ -80,6 +80,20 @@ function techmart_enqueue_assets()
 	}
 
 	/**
+	 * Contact page: form layout and validation. This is a WordPress page
+	 * (see page.php), not a WooCommerce template, so this depends on
+	 * techmart-base rather than techmart-product.
+	 */
+	if (is_page('contact')) {
+		wp_enqueue_style(
+			'techmart-contact-form',
+			get_theme_file_uri('assets/css/contact-form.css'),
+			array('techmart-base'),
+			wp_get_theme()->get('Version')
+		);
+	}
+
+	/**
 	 * Breakpoint overrides load last so they can win the cascade at their
 	 * breakpoints. The dependency list is built up from whichever
 	 * conditional stylesheets actually got enqueued above, rather than

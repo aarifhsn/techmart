@@ -91,7 +91,7 @@ function techmart_setup()
 	 */
 	add_image_size('techmart-product-card', 400, 400, true);
 	add_image_size('techmart-category-thumb', 160, 160, true);
-	add_image_size('techmart-hero', 1200, 700, true);
+	add_image_size('techmart-hero', 1200, 1200, true);
 }
 add_action('after_setup_theme', 'techmart_setup');
 

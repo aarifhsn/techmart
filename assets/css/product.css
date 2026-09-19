@@ -40,21 +40,14 @@ ul.products {
 .upsells ul.products,
 .cross-sells ul.products,
 .tm-weekly-deals .tm-product-grid {
-  display: flex;
-  flex-wrap: wrap;
+  display: grid;
   gap: var(--tm-space-6);
 }
 
-/* ul.columns-4 {
-  display: flex;
-  gap: var(--tm-space-6);
-  flex-flow: wrap;
-} */
-
 /* ---------- Card container ---------- */
 .tm-product-card {
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-template-rows: auto 1fr;
   background: var(--tm-color-white);
   border: 1px solid var(--tm-color-border);
   border-radius: var(--tm-radius-md);
@@ -62,7 +55,7 @@ ul.products {
   transition:
     box-shadow var(--tm-transition-base),
     border-color var(--tm-transition-base);
-  min-width: 230px; /* matches the 400x400 techmart-product-card image size */
+  /* min-width: 230px; */
   max-width: 270px;
 }
 
