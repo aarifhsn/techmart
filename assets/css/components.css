@@ -657,3 +657,11 @@ button.woocommerce-button {
 .woocommerce-order-received .woocommerce-table a.invoice:hover {
   background: var(--tm-color-primary-hover);
 }
+
+.wc-block-product-filter-price-slider .text input[type="text"] {
+  max-width: 80px;
+}
+
+.wc-block-product-filter-price-slider__content {
+  padding: 0 var(--tm-space-1);
+}

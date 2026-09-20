@@ -21,8 +21,8 @@
 
 .tm-footer__grid {
   display: grid;
-  grid-template-columns: 2fr repeat(4, 1fr);
-  gap: var(--tm-space-8);
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: var(--tm-space-8, 32px);
 }
 
 .tm-footer__brand img {

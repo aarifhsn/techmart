@@ -151,8 +151,12 @@
     padding: var(--tm-space-8);
   }
 
+  .tm-why-shop .tm-container {
+    padding: var(--tm-space-8);
+  }
+
   .tm-why-shop__grid {
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(5, 1fr);
     row-gap: var(--tm-space-8);
   }
 
@@ -162,8 +166,8 @@
 
   /* ---------- Footer: tablet ---------- */
   .tm-footer__grid {
-    grid-template-columns: repeat(4, 1fr);
-    row-gap: var(--tm-space-8);
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 28px 24px;
   }
 
   .tm-footer__brand {
@@ -245,11 +249,9 @@
   }
 
   /* ---------- Home: mobile ---------- */
-  .tm-hero__inner {
-    grid-template-columns: 1fr;
-    gap: var(--tm-space-6);
-    padding: var(--tm-space-6) var(--tm-space-5);
-  }
+  /* .tm-hero__inner {
+   
+  } */
 
   .tm-hero__content {
     order: 2;
@@ -259,22 +261,23 @@
     order: 1;
   }
 
-  .tm-hero__actions {
-    flex-wrap: wrap;
-  }
-
   .tm-hero__sidebar {
     display: none;
   }
 
   .tm-hero__trust-strip-inner {
+    grid-template-columns: repeat(2, 1fr);
     gap: var(--tm-space-4);
     padding: var(--tm-space-5);
   }
 
   .tm-hero__trust-strip-inner .tm-trust-item {
     border-left: none;
-    padding-left: 0;
+    padding-inline: var(--tm-space-2);
+  }
+
+  .tm-hero__inner {
+    padding: var(--tm-space-4) var(--tm-space-6);
   }
 
   .tm-categories__grid {
@@ -291,13 +294,11 @@
 
   /* ---------- Promo / Why Shop / Brands / Newsletter: mobile ---------- */
   .tm-promo__inner {
-    flex-direction: column;
-    align-items: flex-start;
     padding: var(--tm-space-6);
   }
 
   .tm-promo__media {
-    max-width: 100%;
+    max-width: 50%;
   }
 
   .tm-promo__badge {
@@ -328,8 +329,15 @@
 
   /* ---------- Footer: mobile ---------- */
   .tm-footer__grid {
-    grid-template-columns: repeat(4, 1fr);
-    gap: var(--tm-space-8);
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 30px 20px;
+  }
+
+  /*
+     * Brand block remains alone at the top.
+     */
+  .tm-footer__grid > :first-child {
+    grid-column: 1 / -1;
   }
 
   .tm-footer__brand {
@@ -384,6 +392,10 @@
   .tm-info-page ul.columns-4 {
     grid-template-columns: repeat(2, 1fr);
   }
+
+  .tm-hero__heading {
+    font-size: var(--tm-fs-h2);
+  }
 }
 
 /* ---------- Mobile: <587x ---------- */
@@ -394,5 +406,13 @@
 
   .tm-newsletter__title {
     font-size: var(--tm-fs-h3);
+  }
+
+  .tm-hero__content {
+    padding: var(--tm-space-2) 0;
+  }
+
+  .tm-hero__heading {
+    font-size: var(--tm-fs-h4);
   }
 }

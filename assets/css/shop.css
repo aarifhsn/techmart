@@ -21,12 +21,15 @@
   align-items: start;
   gap: var(--tm-space-8);
   margin-top: var(--tm-space-6);
+  display: flex;
 }
 
 /* ---------- Sidebar / filters ---------- */
 .tm-shop__sidebar {
   position: sticky;
   top: var(--tm-space-4);
+  min-width: 260px;
+  overflow: hidden;
 }
 
 .tm-shop-sidebar__widget {
